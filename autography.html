@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="PJ's Autography — Racetrack and automotive photography packages for teams, drivers and sponsors.">
+<title>PJ's Autography — Race Photography</title>
+<link rel="stylesheet" href="style.css">
+<style>
+.pkg-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:2px; margin-bottom:48px; }
+.pkg-card {
+  background:var(--grey2); padding:40px 32px;
+  border-top:3px solid var(--line); position:relative; overflow:hidden;
+  transition:border-color 0.3s, transform 0.3s var(--ease);
+}
+.pkg-card:hover { border-top-color:var(--gold); transform:translateY(-4px); }
+.pkg-card.featured { border-top-color:var(--gold); }
+.pkg-badge {
+  position:absolute; top:16px; right:-28px;
+  background:var(--gold); color:var(--black);
+  font-family:'Barlow Condensed',sans-serif; font-size:10px; font-weight:700; letter-spacing:3px; text-transform:uppercase;
+  padding:4px 44px; transform:rotate(45deg);
+}
+.pkg-tier { font-family:'Barlow Condensed',sans-serif; font-size:11px; letter-spacing:5px; text-transform:uppercase; color:var(--muted); margin-bottom:6px; }
+.pkg-name { font-family:'Bebas Neue',sans-serif; font-size:30px; letter-spacing:1px; color:var(--white); margin-bottom:4px; }
+.pkg-price { font-family:'Bebas Neue',sans-serif; font-size:56px; color:var(--gold); line-height:1; margin-bottom:4px; }
+.pkg-sub { font-size:12px; color:var(--muted); margin-bottom:24px; }
+.pkg-features { list-style:none; }
+.pkg-features li { padding:7px 0; font-size:13px; color:var(--text); border-bottom:1px solid var(--line); display:flex; gap:10px; }
+.pkg-features li::before { content:'✓'; color:var(--red); font-weight:700; flex-shrink:0; }
+
+.addons-grid { display:grid; grid-template-columns:1fr 1fr; gap:2px; margin-top:48px; }
+.addon-card { background:var(--grey2); padding:28px; }
+.addon-title { font-family:'Barlow Condensed',sans-serif; font-size:14px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--gold); margin-bottom:12px; }
+.addon-list { list-style:none; }
+.addon-list li { font-size:13px; color:var(--text); padding:6px 0; border-bottom:1px solid var(--line); display:flex; gap:8px; }
+.addon-list li::before { content:'·'; color:var(--red); flex-shrink:0; }
+
+@media(max-width:900px){
+  .pkg-grid { grid-template-columns:1fr; }
+  .addons-grid { grid-template-columns:1fr; }
+}
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+<nav id="mainNav">
+  <a href="index.html" class="nav-logo">PJ'S <em>UNIVERSE</em> <span class="nav-dot"></span></a>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="scaleworks.html">Scaleworks</a>
+    <a href="autography.html" class="active">Autography</a>
+    <a href="portfolio.html">Portfolio</a>
+    <a href="parts.html">Parts</a>
+    <a href="contact.html" class="nav-cta">Book / Commission</a>
+  </div>
+  <button class="nav-toggle" id="navToggle"><span></span><span></span><span></span></button>
+</nav>
+<div class="mobile-nav" id="mobileNav">
+  <button class="mobile-close" id="mobileClose">✕</button>
+  <a href="index.html" onclick="closeMobile()">Home</a>
+  <a href="scaleworks.html" onclick="closeMobile()">Scaleworks</a>
+  <a href="autography.html" onclick="closeMobile()">Autography</a>
+  <a href="portfolio.html" onclick="closeMobile()">Portfolio</a>
+  <a href="parts.html" onclick="closeMobile()">Parts</a>
+  <a href="contact.html" onclick="closeMobile()">Commission</a>
+</div>
+
+<div class="page-hero">
+  <div class="page-hero-bg" style="background:radial-gradient(ellipse 60% 80% at 20% 50%, rgba(201,146,14,0.07) 0%, transparent 70%);"></div>
+  <div class="page-hero-num">AU</div>
+  <div class="page-hero-label gold">PJ's Autography</div>
+  <h1>RACE DAY<br><em>PHOTOGRAPHY</em></h1>
+  <p>The same eye for detail that goes into every scale build, now pointed at the real thing. Race day coverage for teams, drivers and events.</p>
+</div>
+
+<section>
+  <div class="section-label gold">Packages</div>
+  <h2 class="section-title">RACE DAY<br>PACKAGES</h2>
+  <p class="section-body">Professional racetrack photography delivered within 48 hours. From single-car sessions to full sponsor packages — photos that actually do justice to what you've built.</p>
+
+  <div class="pkg-grid">
+    <div class="pkg-card reveal">
+      <div class="pkg-tier">Package 01 — Starter</div>
+      <div class="pkg-name">Starter</div>
+      <div class="pkg-price">€75</div>
+      <div class="pkg-sub">Per session · Delivered 48hrs</div>
+      <ul class="pkg-features">
+        <li>10 fully edited hi-res photos</li>
+        <li>Web & print ready</li>
+        <li>1 car or driver focus</li>
+        <li>Personal & social use rights</li>
+      </ul>
+    </div>
+    <div class="pkg-card featured reveal">
+      <div class="pkg-badge">Most Popular</div>
+      <div class="pkg-tier">Package 02 — Team</div>
+      <div class="pkg-name">Team Day</div>
+      <div class="pkg-price">€250</div>
+      <div class="pkg-sub">Full race day coverage</div>
+      <ul class="pkg-features">
+        <li>30+ edited hi-res photos</li>
+        <li>Team, car & paddock coverage</li>
+        <li>Social media ready edits</li>
+        <li>Full day on-site presence</li>
+        <li>Sponsor usage rights</li>
+      </ul>
+    </div>
+    <div class="pkg-card reveal">
+      <div class="pkg-tier">Package 03 — Premium</div>
+      <div class="pkg-name">Sponsor Pack</div>
+      <div class="pkg-price">€500</div>
+      <div class="pkg-sub">Full premium coverage</div>
+      <ul class="pkg-features">
+        <li>50+ edited hi-res photos</li>
+        <li>Sponsor-formatted layouts</li>
+        <li>Press & print ready files</li>
+        <li>Commercial usage rights</li>
+        <li>Scale model add-on available</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="addons-grid">
+    <div class="addon-card reveal">
+      <div class="addon-title">📷 Photography Add-Ons</div>
+      <ul class="addon-list">
+        <li>Rush delivery 24hr — +€30</li>
+        <li>Extra edited images (per 10) — +€25</li>
+        <li>Print-ready 300dpi files — +€20</li>
+        <li>Stock licensing — from €50/image</li>
+      </ul>
+    </div>
+    <div class="addon-card reveal">
+      <div class="addon-title">🔧 Cross-Brand Add-Ons</div>
+      <ul class="addon-list">
+        <li>Scale replica of your race car — from €150</li>
+        <li>Photo + model bundle — save €50</li>
+        <li>Gift/trophy model for sponsor — from €200</li>
+        <li>Full Shoot & Build package — POA</li>
+      </ul>
+    </div>
+  </div>
+
+  <div style="margin-top:48px; display:flex; gap:16px; flex-wrap:wrap;">
+    <a href="contact.html" class="btn btn-gold">📬 Book a Race Day</a>
+    <a href="portfolio.html" class="btn btn-secondary">View Photo Gallery →</a>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-grid">
+    <div><div class="footer-brand">PJ'S <em>UNIVERSE</em></div><div class="footer-tagline">Scale Models · Race Photography · Automotive Art</div></div>
+    <div class="footer-col"><h4>Scaleworks</h4><a href="scaleworks.html">Shoot & Build</a><a href="parts.html">Aftermarket Parts</a><a href="https://www.etsy.com/be/shop/PjsuniverseShop" target="_blank">Etsy Shop</a></div>
+    <div class="footer-col"><h4>Autography</h4><a href="autography.html">Race Day Packages</a><a href="portfolio.html">Portfolio</a><a href="contact.html">Book a Session</a></div>
+    <div class="footer-col"><h4>Connect</h4><a href="https://facebook.com/pjsscaleworks" target="_blank">Scaleworks FB</a><a href="https://facebook.com/pjsautography" target="_blank">Autography FB</a><a href="contact.html">Get in Touch</a></div>
+  </div>
+  <div class="footer-bottom"><div class="footer-copy">© 2026 PJ's Universe. All rights reserved.</div></div>
+</footer>
+<script src="shared.js"></script>
+</body>
+</html>
