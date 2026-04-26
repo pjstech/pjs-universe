@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Book a race day photography session or commission a scale model build with PJ's Universe.">
+<title>Book / Commission — PJ's Universe</title>
+<link rel="stylesheet" href="style.css">
+<style>
+.contact-layout { display:grid; grid-template-columns:1fr 1fr; gap:64px; align-items:start; }
+
+/* FORM */
+.form-group { display:flex; flex-direction:column; gap:6px; margin-bottom:16px; }
+.form-label { font-family:'Barlow Condensed',sans-serif; font-size:11px; letter-spacing:4px; text-transform:uppercase; color:var(--muted); }
+.form-input, .form-select, .form-textarea {
+  background:var(--grey2); border:1px solid var(--line);
+  color:var(--white); padding:14px 18px;
+  font-family:'Barlow',sans-serif; font-size:14px; font-weight:300;
+  outline:none; transition:border-color 0.2s; width:100%;
+}
+.form-input:focus, .form-select:focus, .form-textarea:focus { border-color:var(--red); }
+.form-select { appearance:none; }
+.form-textarea { resize:vertical; min-height:140px; }
+
+.routing-box {
+  background:var(--grey2); border:1px solid var(--line); border-left:3px solid var(--gold);
+  padding:12px 16px; margin-bottom:16px; font-size:13px; color:var(--muted);
+  display:none;
+}
+.routing-box strong { color:var(--gold-l); }
+
+.form-submit {
+  background:var(--red); color:white; border:none;
+  padding:18px 40px; width:100%;
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:15px; font-weight:700; letter-spacing:3px; text-transform:uppercase;
+  transition:background 0.2s, transform 0.2s;
+}
+.form-submit:hover { background:var(--red-d); transform:translateY(-2px); }
+
+.success-msg {
+  display:none; background:#0a1f0a; border:1px solid #1a4a1a; border-left:3px solid #4caf50;
+  padding:16px 20px; color:#4caf50; font-size:14px; margin-top:12px;
+}
+
+/* INFO SIDE */
+.info-block { margin-bottom:24px; padding-bottom:24px; border-bottom:1px solid var(--line); }
+.info-block:last-child { border-bottom:none; }
+.info-label { font-family:'Barlow Condensed',sans-serif; font-size:11px; letter-spacing:5px; text-transform:uppercase; color:var(--muted); margin-bottom:6px; }
+.info-value { font-size:15px; color:var(--white); }
+.info-value a { color:var(--gold-l); text-decoration:none; }
+.info-value a:hover { color:var(--white); }
+
+.brand-contact { background:var(--grey2); border-left:3px solid var(--red); padding:20px 24px; margin-bottom:8px; }
+.brand-contact.gold { border-left-color:var(--gold); }
+.bc-brand { font-family:'Barlow Condensed',sans-serif; font-size:12px; letter-spacing:4px; text-transform:uppercase; color:var(--muted); margin-bottom:4px; }
+.bc-email { font-size:14px; color:var(--white); }
+
+.hint-box { background:linear-gradient(135deg,#0f0a00,var(--grey2)); border:1px solid rgba(201,146,14,0.25); padding:24px; margin-top:32px; }
+.hint-label { font-family:'Barlow Condensed',sans-serif; font-size:11px; letter-spacing:4px; text-transform:uppercase; color:var(--gold); margin-bottom:8px; }
+.hint-box p { font-size:13px; color:var(--muted); line-height:1.7; }
+
+/* SOCIAL LINKS */
+.social-links { display:flex; flex-direction:column; gap:8px; margin-top:32px; }
+.social-link {
+  display:flex; align-items:center; gap:16px;
+  padding:14px 18px; background:var(--grey2); border:1px solid var(--line);
+  text-decoration:none; color:var(--text);
+  border-left:3px solid transparent; transition:all 0.25s var(--ease);
+}
+.social-link:hover { border-left-color:var(--red); background:var(--grey3); transform:translateX(4px); }
+.social-link.gold:hover { border-left-color:var(--gold); }
+.s-icon { font-size:20px; flex-shrink:0; width:28px; text-align:center; }
+.s-name { font-family:'Barlow Condensed',sans-serif; font-size:14px; font-weight:700; letter-spacing:1px; text-transform:uppercase; color:var(--white); display:block; }
+.s-desc { font-size:12px; color:var(--muted); }
+
+@media(max-width:900px) {
+  .contact-layout { grid-template-columns:1fr; gap:48px; }
+}
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+<nav id="mainNav">
+  <a href="index.html" class="nav-logo">PJ'S <em>UNIVERSE</em> <span class="nav-dot"></span></a>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="scaleworks.html">Scaleworks</a>
+    <a href="autography.html">Autography</a>
+    <a href="portfolio.html">Portfolio</a>
+    <a href="parts.html">Parts</a>
+    <a href="contact.html" class="active nav-cta">Book / Commission</a>
+  </div>
+  <button class="nav-toggle" id="navToggle"><span></span><span></span><span></span></button>
+</nav>
+<div class="mobile-nav" id="mobileNav">
+  <button class="mobile-close" id="mobileClose">✕</button>
+  <a href="index.html" onclick="closeMobile()">Home</a>
+  <a href="scaleworks.html" onclick="closeMobile()">Scaleworks</a>
+  <a href="autography.html" onclick="closeMobile()">Autography</a>
+  <a href="portfolio.html" onclick="closeMobile()">Portfolio</a>
+  <a href="parts.html" onclick="closeMobile()">Parts</a>
+  <a href="contact.html" onclick="closeMobile()">Commission</a>
+</div>
+
+<div class="page-hero">
+  <div class="page-hero-bg" style="background:radial-gradient(ellipse 60% 80% at 30% 60%, rgba(192,57,43,0.08) 0%, transparent 70%);"></div>
+  <div class="page-hero-num">CT</div>
+  <div class="page-hero-label">Get In Touch</div>
+  <h1>BOOK /<br><em>COMMISSION</em></h1>
+  <p>Whether it's a race day photography package, a Shoot & Build commission, aftermarket parts or a digital guide — start here.</p>
+</div>
+
+<section>
+  <div class="contact-layout">
+
+    <!-- FORM -->
+    <div>
+      <div class="section-label" style="margin-bottom:24px;">Send a Message</div>
+      <form onsubmit="handleSubmit(event)">
+        <div class="form-group">
+          <label class="form-label">Your Name</label>
+          <input class="form-input" type="text" id="f-name" placeholder="Your name" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Your Email</label>
+          <input class="form-input" type="email" id="f-email" placeholder="your@email.com" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">I'm Interested In</label>
+          <select class="form-select" id="f-service" onchange="updateRouting(this.value)">
+            <option value="">Select a service...</option>
+            <optgroup label="PJ's Scaleworks">
+              <option value="scaleworks">Shoot & Build Commission (Price on Request)</option>
+              <option value="scaleworks">Aftermarket Parts — 3D Printed</option>
+              <option value="scaleworks">Aftermarket Parts — Aluminium</option>
+              <option value="scaleworks">Aftermarket Parts — Custom Stickers</option>
+              <option value="scaleworks">Digital Guide Purchase</option>
+            </optgroup>
+            <optgroup label="PJ's Autography">
+              <option value="autography">Race Photography — Starter (€75)</option>
+              <option value="autography">Race Photography — Team Day (€250)</option>
+              <option value="autography">Race Photography — Sponsor Pack (€500)</option>
+            </optgroup>
+            <option value="scaleworks">Something else / general enquiry</option>
+          </select>
+        </div>
+        <div class="routing-box" id="routing-box">
+          📬 Your message will go to: <strong id="routing-email"></strong>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Tell Me More</label>
+          <textarea class="form-textarea" id="f-msg" placeholder="What car, what event, what livery, what parts — the more detail the better. No commitment needed to enquire."></textarea>
+        </div>
+        <button type="submit" class="form-submit">Send Message →</button>
+        <div class="success-msg" id="success-msg">✓ Opening your email app with your message pre-filled. I'll reply within 24 hours!</div>
+      </form>
+    </div>
+
+    <!-- INFO -->
+    <div>
+      <div class="section-label" style="margin-bottom:24px;">Contact Info</div>
+
+      <div class="brand-contact reveal">
+        <div class="bc-brand">PJ's Scaleworks — Builds & Parts</div>
+        <div class="bc-email"><a href="mailto:pjsscaleworks@hotmail.com">pjsscaleworks@hotmail.com</a></div>
+      </div>
+      <div class="brand-contact gold reveal">
+        <div class="bc-brand">PJ's Autography — Photography</div>
+        <div class="bc-email"><a href="mailto:pjsautography@hotmail.com">pjsautography@hotmail.com</a></div>
+      </div>
+
+      <div class="info-block" style="margin-top:32px;">
+        <div class="info-label">Response Time</div>
+        <div class="info-value">Within 24 hours</div>
+      </div>
+      <div class="info-block">
+        <div class="info-label">2026 Build Slots</div>
+        <div class="info-value">3 available — enquire now to secure yours</div>
+      </div>
+      <div class="info-block">
+        <div class="info-label">Photography Booking</div>
+        <div class="info-value">Book at least 1 week before your event</div>
+      </div>
+      <div class="info-block">
+        <div class="info-label">Etsy Shop</div>
+        <div class="info-value"><a href="https://www.etsy.com/be/shop/PjsuniverseShop" target="_blank">www.etsy.com/be/shop/PjsuniverseShop →</a></div>
+      </div>
+
+      <div class="hint-box">
+        <div class="hint-label">💡 Not Sure Where to Start?</div>
+        <p>Just describe what you have in mind — build, photography, parts or all three. No commitment needed to enquire. I'll guide you to the best option.</p>
+      </div>
+
+      <div class="social-links">
+        <a href="https://facebook.com/pjsscaleworks" target="_blank" class="social-link">
+          <div class="s-icon">📘</div>
+          <div><span class="s-name">Scaleworks — Facebook</span><span class="s-desc">Builds, process videos & community</span></div>
+        </a>
+        <a href="https://facebook.com/pjsautography" target="_blank" class="social-link gold">
+          <div class="s-icon">📘</div>
+          <div><span class="s-name">Autography — Facebook</span><span class="s-desc">Racetrack photography & automotive shots</span></div>
+        </a>
+        <a href="https://www.etsy.com/be/shop/PjsuniverseShop" target="_blank" class="social-link">
+          <div class="s-icon">🛒</div>
+          <div><span class="s-name">Etsy Shop</span><span class="s-desc">Digital guides & commissions</span></div>
+        </a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  <div class="footer-grid">
+    <div><div class="footer-brand">PJ'S <em>UNIVERSE</em></div><div class="footer-tagline">Scale Models · Race Photography · Automotive Art</div></div>
+    <div class="footer-col"><h4>Scaleworks</h4><a href="scaleworks.html">Shoot & Build</a><a href="parts.html">Aftermarket Parts</a><a href="https://www.etsy.com/be/shop/PjsuniverseShop" target="_blank">Etsy Shop</a></div>
+    <div class="footer-col"><h4>Autography</h4><a href="autography.html">Race Day Packages</a><a href="portfolio.html">Portfolio</a><a href="contact.html">Book a Session</a></div>
+    <div class="footer-col"><h4>Connect</h4><a href="https://facebook.com/pjsscaleworks" target="_blank">Scaleworks FB</a><a href="https://facebook.com/pjsautography" target="_blank">Autography FB</a><a href="contact.html">Get in Touch</a></div>
+  </div>
+  <div class="footer-bottom"><div class="footer-copy">© 2026 PJ's Universe. All rights reserved.</div></div>
+</footer>
+
+<script src="shared.js"></script>
+<script>
+function updateRouting(val) {
+  const box   = document.getElementById('routing-box');
+  const label = document.getElementById('routing-email');
+  if (val === 'scaleworks') {
+    label.textContent = 'pjsscaleworks@hotmail.com';
+    box.style.display = 'block';
+  } else if (val === 'autography') {
+    label.textContent = 'pjsautography@hotmail.com';
+    box.style.display = 'block';
+  } else {
+    box.style.display = 'none';
+  }
+}
+
+function handleSubmit(e) {
+  e.preventDefault();
+  const val     = document.getElementById('f-service').value;
+  const email   = val === 'autography' ? 'pjsautography@hotmail.com' : 'pjsscaleworks@hotmail.com';
+  const name    = document.getElementById('f-name').value;
+  const from    = document.getElementById('f-email').value;
+  const service = document.getElementById('f-service');
+  const svcText = service.options[service.selectedIndex].text;
+  const msg     = document.getElementById('f-msg').value;
+  const subject = encodeURIComponent("PJ's Universe Enquiry — " + svcText);
+  const body    = encodeURIComponent(
+    'Name: ' + name + '\nFrom: ' + from + '\nService: ' + svcText + '\n\nMessage:\n' + msg
+  );
+  window.location.href = 'mailto:' + email + '?subject=' + subject + '&body=' + body;
+  document.getElementById('success-msg').style.display = 'block';
+  e.target.reset();
+  document.getElementById('routing-box').style.display = 'none';
+  setTimeout(() => { document.getElementById('success-msg').style.display = 'none'; }, 8000);
+}
+</script>
+</body>
+</html>

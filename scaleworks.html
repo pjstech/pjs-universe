@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="PJ's Scaleworks — Museum-quality scale model builds. 3 commissions per year. Shoot & Build packages.">
+<title>PJ's Scaleworks — Shoot & Build</title>
+<link rel="stylesheet" href="style.css">
+<style>
+.slots { display:grid; grid-template-columns:repeat(4,1fr); gap:2px; margin-bottom:48px; }
+.slot-card { background:var(--grey2); border:1px solid var(--line); padding:24px 20px; text-align:center; }
+.slot-card.highlight { background:linear-gradient(135deg,#1a0000,var(--grey2)); border-color:rgba(192,57,43,0.3); }
+.slot-num { font-family:'Bebas Neue',sans-serif; font-size:56px; line-height:1; margin-bottom:4px; }
+.slot-num.r { color:var(--red); }
+.slot-num.g { color:var(--gold-l); }
+.slot-num.m { color:var(--muted); }
+.slot-label { font-family:'Barlow Condensed',sans-serif; font-size:11px; letter-spacing:4px; text-transform:uppercase; color:var(--muted); }
+
+.offer-grid { display:grid; grid-template-columns:3fr 2fr; gap:2px; margin-bottom:64px; }
+.offer-main { background:var(--grey2); border-top:4px solid var(--red); padding:48px 40px; }
+.offer-side { display:flex; flex-direction:column; gap:2px; }
+.offer-side-card { background:var(--grey2); padding:28px 32px; flex:1; }
+.offer-side-card h4 { font-family:'Barlow Condensed',sans-serif; font-size:14px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--white); margin-bottom:8px; }
+.offer-side-card p { font-size:13px; color:var(--muted); line-height:1.7; }
+
+.feature-list { list-style:none; margin:24px 0 32px; }
+.feature-list li { padding:10px 0; font-size:14px; color:var(--text); border-bottom:1px solid var(--line); display:flex; gap:12px; align-items:flex-start; }
+.feature-list li::before { content:'✓'; color:var(--gold); font-weight:700; flex-shrink:0; }
+
+.guides-grid { display:grid; grid-template-columns:1fr 1fr; gap:2px; }
+.guide-card {
+  background:var(--grey2); padding:28px; display:flex; align-items:center; gap:20px;
+  text-decoration:none; border-left:3px solid transparent;
+  transition:border-color 0.3s, background 0.3s;
+}
+.guide-card:hover { border-left-color:var(--gold); background:var(--grey3); }
+.guide-icon { font-size:30px; flex-shrink:0; }
+.guide-title { font-family:'Barlow Condensed',sans-serif; font-size:16px; font-weight:700; letter-spacing:1px; text-transform:uppercase; color:var(--white); display:block; margin-bottom:2px; }
+.guide-sub { font-size:12px; color:var(--muted); }
+.guide-price { margin-left:auto; font-family:'Bebas Neue',sans-serif; font-size:30px; color:var(--gold); flex-shrink:0; }
+
+@media(max-width:900px){
+  .slots { grid-template-columns:repeat(2,1fr); }
+  .offer-grid { grid-template-columns:1fr; }
+  .guides-grid { grid-template-columns:1fr; }
+}
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+<nav id="mainNav">
+  <a href="index.html" class="nav-logo">PJ'S <em>UNIVERSE</em> <span class="nav-dot"></span></a>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="scaleworks.html" class="active">Scaleworks</a>
+    <a href="autography.html">Autography</a>
+    <a href="portfolio.html">Portfolio</a>
+    <a href="parts.html">Parts</a>
+    <a href="contact.html" class="nav-cta">Book / Commission</a>
+  </div>
+  <button class="nav-toggle" id="navToggle"><span></span><span></span><span></span></button>
+</nav>
+<div class="mobile-nav" id="mobileNav">
+  <button class="mobile-close" id="mobileClose">✕</button>
+  <a href="index.html" onclick="closeMobile()">Home</a>
+  <a href="scaleworks.html" onclick="closeMobile()">Scaleworks</a>
+  <a href="autography.html" onclick="closeMobile()">Autography</a>
+  <a href="portfolio.html" onclick="closeMobile()">Portfolio</a>
+  <a href="parts.html" onclick="closeMobile()">Parts</a>
+  <a href="contact.html" onclick="closeMobile()">Commission</a>
+</div>
+
+<div class="page-hero" style="background:var(--grey);">
+  <div class="page-hero-bg" style="background:radial-gradient(ellipse 60% 80% at 80% 50%, rgba(192,57,43,0.08) 0%, transparent 70%);"></div>
+  <div class="page-hero-num">SW</div>
+  <div class="page-hero-label">PJ's Scaleworks</div>
+  <h1>SHOOT &<br><em>BUILD</em></h1>
+  <p>Museum-quality scale model commissions. I only accept 3 builds per year — every one is a full collaboration between racetrack photography and the workbench.</p>
+</div>
+
+<section>
+  <div class="section-label">Availability</div>
+  <h2 class="section-title">2026 BUILD<br>SLOTS</h2>
+
+  <div class="slots">
+    <div class="slot-card highlight reveal">
+      <div class="slot-num r">3</div>
+      <div class="slot-label">Total Slots</div>
+    </div>
+    <div class="slot-card reveal">
+      <div class="slot-num m">0</div>
+      <div class="slot-label">Slots Taken</div>
+    </div>
+    <div class="slot-card reveal">
+      <div class="slot-num g">6–8</div>
+      <div class="slot-label">Weeks Build Time</div>
+    </div>
+    <div class="slot-card reveal">
+      <div class="slot-num r">POA</div>
+      <div class="slot-label">Price on Request</div>
+    </div>
+  </div>
+
+  <div class="offer-grid">
+    <div class="offer-main reveal">
+      <div class="section-label" style="margin-bottom:8px;">The Only Offering</div>
+      <div style="font-family:'Bebas Neue',sans-serif; font-size:52px; color:var(--white); line-height:0.95; letter-spacing:2px; margin-bottom:24px;">Shoot &<br>Build Commission</div>
+      <ul class="feature-list">
+        <li>Full race day photography session of your car</li>
+        <li>30+ edited hi-res race photos delivered within 48hrs</li>
+        <li>Museum-quality scale replica of your exact car</li>
+        <li>Exact livery, sponsor decals & race detail reproduced</li>
+        <li>Maximum interior, engine & chassis detail</li>
+        <li>Custom aftermarket parts where required</li>
+        <li>Professional studio photography of finished model</li>
+        <li>Signed certificate of authenticity</li>
+        <li>Display case available as optional add-on</li>
+      </ul>
+      <div style="display:flex; gap:16px; flex-wrap:wrap;">
+        <a href="contact.html" class="btn btn-primary">Request a Quote →</a>
+        <a href="portfolio.html" class="btn btn-secondary">See Previous Builds</a>
+      </div>
+    </div>
+    <div class="offer-side">
+      <div class="offer-side-card reveal">
+        <h4>Why Only 3 Per Year?</h4>
+        <p>Each build gets my full, undivided attention. I don't rush. I don't compromise. Three builds a year means every client gets the obsessive detail work that makes a PJ's Scaleworks piece genuinely one of a kind.</p>
+      </div>
+      <div class="offer-side-card reveal">
+        <h4>What Determines the Price?</h4>
+        <p>Pricing depends on livery complexity, custom parts required, travel distance to the event, and specific requirements. Every quote is personalised — no two builds are the same.</p>
+      </div>
+      <div class="offer-side-card reveal" style="background:linear-gradient(135deg,#0f0a00,var(--grey2)); border:1px solid rgba(201,146,14,0.2);">
+        <h4 style="color:var(--gold);">🏁 Aftermarket Parts</h4>
+        <p>I also produce custom 3D printed parts, aluminium components and custom stickers. <a href="parts.html" style="color:var(--gold-l); text-decoration:none;">See the Parts page →</a></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- DIGITAL GUIDES -->
+  <div class="section-label gold" style="margin-bottom:12px;">Digital Products</div>
+  <h3 style="font-family:'Bebas Neue',sans-serif; font-size:40px; letter-spacing:1px; color:var(--white); margin-bottom:24px;">GUIDES & TUTORIALS</h3>
+  <div class="guides-grid">
+    <a href="https://www.etsy.com/be/shop/PjsuniverseShop" target="_blank" class="guide-card reveal">
+      <div class="guide-icon">📸</div>
+      <div>
+        <span class="guide-title">Shoot Your Models Like a Pro</span>
+        <span class="guide-sub">Vol. 1 · PDF Download · Available now on Etsy</span>
+      </div>
+      <div class="guide-price">€12</div>
+    </a>
+    <a href="contact.html" class="guide-card reveal">
+      <div class="guide-icon">🎨</div>
+      <div>
+        <span class="guide-title">Custom Paint & Weathering Bible</span>
+        <span class="guide-sub">Vol. 2 · PDF Download · Coming soon</span>
+      </div>
+      <div class="guide-price">€12</div>
+    </a>
+  </div>
+  <div style="margin-top:32px; display:flex; gap:16px; flex-wrap:wrap;">
+    <a href="https://www.etsy.com/be/shop/PjsuniverseShop" target="_blank" class="btn btn-gold">🛒 Visit Etsy Shop</a>
+    <a href="contact.html" class="btn btn-secondary">Custom Enquiry →</a>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-brand">PJ'S <em>UNIVERSE</em></div>
+      <div class="footer-tagline">Scale Models · Race Photography · Automotive Art</div>
+    </div>
+    <div class="footer-col"><h4>Scaleworks</h4><a href="scaleworks.html">Shoot & Build</a><a href="parts.html">Aftermarket Parts</a><a href="https://www.etsy.com/be/shop/PjsuniverseShop" target="_blank">Etsy Shop</a></div>
+    <div class="footer-col"><h4>Autography</h4><a href="autography.html">Race Day Packages</a><a href="portfolio.html">Portfolio</a><a href="contact.html">Book a Session</a></div>
+    <div class="footer-col"><h4>Connect</h4><a href="https://facebook.com/pjsscaleworks" target="_blank">Scaleworks FB</a><a href="https://facebook.com/pjsautography" target="_blank">Autography FB</a><a href="contact.html">Get in Touch</a></div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2026 PJ's Universe. All rights reserved.</div>
+    <div class="footer-copy">PJ's Scaleworks · PJ's Autography</div>
+  </div>
+</footer>
+<script src="shared.js"></script>
+</body>
+</html>

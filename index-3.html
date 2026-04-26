@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="PJ's Universe — Professional scale model builds & racetrack photography. Two brands, one obsession.">
+<title>PJ's Universe — Home</title>
+<link rel="stylesheet" href="style.css">
+<style>
+/* ── HERO ── */
+.hero {
+  min-height:100vh; display:flex; align-items:flex-end;
+  padding:0 48px 80px; position:relative; overflow:hidden;
+}
+.hero-bg {
+  position:absolute; inset:0;
+  background:
+    radial-gradient(ellipse 60% 60% at 70% 40%, rgba(192,57,43,0.08) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 40% at 20% 80%, rgba(201,146,14,0.05) 0%, transparent 60%);
+}
+.hero::before {
+  content:''; position:absolute; inset:0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px);
+  background-size:80px 80px;
+}
+.speed-lines { position:absolute; inset:0; overflow:hidden; pointer-events:none; }
+.speed-lines::before,.speed-lines::after {
+  content:''; position:absolute; top:0; bottom:0; width:1px;
+  background:linear-gradient(to bottom, transparent, rgba(192,57,43,0.15) 40%, rgba(192,57,43,0.15) 60%, transparent);
+}
+.speed-lines::before { left:30%; animation:speedLine 3s ease-in-out infinite; }
+.speed-lines::after  { left:65%; animation:speedLine 3s 1.5s ease-in-out infinite; }
+@keyframes speedLine {
+  0%   { opacity:0; transform:scaleY(0) translateY(-50%); }
+  50%  { opacity:1; transform:scaleY(1) translateY(0); }
+  100% { opacity:0; transform:scaleY(0) translateY(50%); }
+}
+.hero-num {
+  position:absolute; right:-40px; top:50%; transform:translateY(-50%);
+  font-family:'Bebas Neue',sans-serif; font-size:clamp(200px,30vw,460px);
+  color:rgba(192,57,43,0.04); line-height:1; letter-spacing:-10px; user-select:none;
+}
+.hero-content { position:relative; z-index:1; max-width:900px; }
+.hero-label {
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:12px; letter-spacing:7px; text-transform:uppercase;
+  color:var(--red); margin-bottom:24px;
+  opacity:0; animation:fadeUp 1s 0.2s var(--ease) forwards;
+}
+.hero h1 {
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(70px,12vw,160px); line-height:0.88;
+  color:var(--white); letter-spacing:2px; margin-bottom:32px;
+  opacity:0; animation:fadeUp 1s 0.4s var(--ease) forwards;
+}
+.hero h1 em  { color:var(--red); font-style:normal; display:block; }
+.hero h1 .g  { color:var(--gold-l); }
+.hero-sub {
+  font-size:clamp(15px,1.5vw,18px); color:var(--muted);
+  max-width:560px; line-height:1.8; margin-bottom:48px;
+  opacity:0; animation:fadeUp 1s 0.6s var(--ease) forwards;
+}
+.hero-actions {
+  display:flex; gap:16px; flex-wrap:wrap;
+  opacity:0; animation:fadeUp 1s 0.8s var(--ease) forwards;
+}
+.hero-scroll {
+  position:absolute; bottom:40px; right:48px;
+  display:flex; align-items:center; gap:12px;
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:11px; letter-spacing:4px; text-transform:uppercase; color:var(--muted);
+  opacity:0; animation:fadeUp 1s 1.2s var(--ease) forwards;
+}
+.scroll-line { width:40px; height:1px; background:var(--muted); animation:pulse 2s ease infinite; }
+@keyframes fadeUp { from{opacity:0;transform:translateY(30px)} to{opacity:1;transform:translateY(0)} }
+@keyframes pulse  { 0%,100%{opacity:0.3} 50%{opacity:1} }
+
+/* ── STATS ── */
+.stats-strip {
+  display:grid; grid-template-columns:repeat(4,1fr);
+  border-top:1px solid var(--line); border-bottom:1px solid var(--line);
+}
+.stat-item { padding:40px 32px; border-right:1px solid var(--line); text-align:center; }
+.stat-item:last-child { border-right:none; }
+.stat-num { font-family:'Bebas Neue',sans-serif; font-size:52px; line-height:1; color:var(--white); margin-bottom:4px; }
+.stat-num.r { color:var(--red); }
+.stat-num.g { color:var(--gold-l); }
+.stat-label { font-family:'Barlow Condensed',sans-serif; font-size:11px; letter-spacing:4px; text-transform:uppercase; color:var(--muted); }
+
+/* ── BRAND CARDS ── */
+.brand-grid { display:grid; grid-template-columns:1fr 1fr; gap:2px; }
+.brand-card {
+  padding:64px 48px; background:var(--grey2); position:relative;
+  overflow:hidden; border-top:4px solid transparent;
+  transition:border-color 0.3s;
+  text-decoration:none; display:block;
+}
+.brand-card.red  { border-top-color:var(--red); }
+.brand-card.gold { border-top-color:var(--gold); }
+.brand-card-num {
+  position:absolute; right:-20px; bottom:-20px;
+  font-family:'Bebas Neue',sans-serif; font-size:180px;
+  color:rgba(255,255,255,0.03); line-height:1; pointer-events:none;
+}
+.brand-card h2 { font-family:'Bebas Neue',sans-serif; font-size:40px; letter-spacing:2px; color:var(--white); margin-bottom:8px; }
+.brand-card .bc-label { font-family:'Barlow Condensed',sans-serif; font-size:11px; letter-spacing:5px; text-transform:uppercase; color:var(--muted); margin-bottom:24px; }
+.brand-card p { font-size:14px; color:var(--muted); line-height:1.8; max-width:420px; margin-bottom:32px; }
+.bc-arrow { font-family:'Barlow Condensed',sans-serif; font-size:14px; letter-spacing:3px; text-transform:uppercase; color:var(--red); }
+.brand-card.gold .bc-arrow { color:var(--gold); }
+
+/* ── STORY ── */
+.story-flow { display:flex; flex-direction:column; gap:2px; }
+.story-step {
+  display:flex; gap:20px; align-items:center;
+  padding:20px 28px; background:var(--grey2);
+  border-left:3px solid transparent; transition:all 0.3s;
+}
+.story-step:hover { border-left-color:var(--red); background:var(--grey3); }
+.story-icon { font-size:24px; flex-shrink:0; width:36px; text-align:center; }
+.story-text strong { display:block; font-family:'Barlow Condensed',sans-serif; font-size:16px; font-weight:700; letter-spacing:1px; text-transform:uppercase; color:var(--white); margin-bottom:2px; }
+.story-text { font-size:14px; color:var(--muted); }
+
+@media(max-width:900px) {
+  .hero { padding:0 24px 80px; }
+  .hero-scroll { right:24px; }
+  .stats-strip { grid-template-columns:repeat(2,1fr); }
+  .brand-grid { grid-template-columns:1fr; }
+}
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<nav id="mainNav">
+  <a href="index.html" class="nav-logo">PJ'S <em>UNIVERSE</em> <span class="nav-dot"></span></a>
+  <div class="nav-links">
+    <a href="index.html" class="active">Home</a>
+    <a href="scaleworks.html">Scaleworks</a>
+    <a href="autography.html">Autography</a>
+    <a href="portfolio.html">Portfolio</a>
+    <a href="parts.html">Parts</a>
+    <a href="contact.html" class="nav-cta">Book / Commission</a>
+  </div>
+  <button class="nav-toggle" id="navToggle"><span></span><span></span><span></span></button>
+</nav>
+<div class="mobile-nav" id="mobileNav">
+  <button class="mobile-close" id="mobileClose">✕</button>
+  <a href="index.html" onclick="closeMobile()">Home</a>
+  <a href="scaleworks.html" onclick="closeMobile()">Scaleworks</a>
+  <a href="autography.html" onclick="closeMobile()">Autography</a>
+  <a href="portfolio.html" onclick="closeMobile()">Portfolio</a>
+  <a href="parts.html" onclick="closeMobile()">Parts</a>
+  <a href="contact.html" onclick="closeMobile()">Commission</a>
+</div>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-bg"></div>
+  <div class="speed-lines"></div>
+  <div class="hero-num">PJ</div>
+  <div class="hero-content">
+    <div class="hero-label">Scale Models · Race Photography · Automotive Art</div>
+    <h1>I Shoot It.<br><em>Then I</em><br><span class="g">Build It.</span></h1>
+    <p class="hero-sub">Professional scale model builder and automotive photographer. Two brands, one obsession — the cars that make your pulse race.</p>
+    <div class="hero-actions">
+      <a href="scaleworks.html" class="btn btn-primary">🔧 Commission a Build</a>
+      <a href="autography.html" class="btn btn-gold">📷 Book a Race Day</a>
+      <a href="portfolio.html" class="btn btn-secondary">View Portfolio ↓</a>
+    </div>
+  </div>
+  <div class="hero-scroll"><div class="scroll-line"></div>Scroll</div>
+</header>
+
+<!-- STATS -->
+<div class="stats-strip">
+  <div class="stat-item reveal"><div class="stat-num r">7K</div><div class="stat-label">Followers</div></div>
+  <div class="stat-item reveal"><div class="stat-num g">90K</div><div class="stat-label">Monthly Reach</div></div>
+  <div class="stat-item reveal"><div class="stat-num">3</div><div class="stat-label">Builds / Year</div></div>
+  <div class="stat-item reveal"><div class="stat-num r">2</div><div class="stat-label">Brands, 1 Passion</div></div>
+</div>
+
+<!-- BRANDS -->
+<section style="background:var(--grey); border-top:1px solid var(--line); padding:80px 48px;">
+  <div class="section-label">The Brands</div>
+  <h2 class="section-title">TWO BRANDS,<br>ONE WORLD</h2>
+  <div class="brand-grid">
+    <a href="scaleworks.html" class="brand-card red reveal">
+      <div class="brand-card-num">S</div>
+      <div class="bc-label">Scale Models</div>
+      <h2>PJ's Scaleworks</h2>
+      <p>Museum-quality scale model builds. I only take 3 commissions per year — each one a full Shoot & Build collaboration between the real car and the workbench replica.</p>
+      <div class="bc-arrow">Explore Scaleworks →</div>
+    </a>
+    <a href="autography.html" class="brand-card gold reveal">
+      <div class="brand-card-num">A</div>
+      <div class="bc-label">Race Photography</div>
+      <h2>PJ's Autography</h2>
+      <p>Racetrack and automotive photography for teams, drivers and sponsors. The same eye for detail that goes into every scale build — pointed at the real thing.</p>
+      <div class="bc-arrow" style="color:var(--gold)">Explore Autography →</div>
+    </a>
+  </div>
+</section>
+
+<!-- STORY -->
+<section>
+  <div class="section-label">The Signature Story</div>
+  <h2 class="section-title">I SHOOT IT.<br>THEN I BUILD IT.</h2>
+  <p class="section-body">One car. Two perspectives. The real thing captured at speed — then recreated in 1:18 on my workbench. This is the story nobody else is telling.</p>
+  <div class="story-flow">
+    <div class="story-step reveal"><div class="story-icon">📷</div><div class="story-text"><strong>Racetrack Shoot</strong>I photograph your car at the event — speed, detail, atmosphere.</div></div>
+    <div class="story-step reveal"><div class="story-icon">🔧</div><div class="story-text"><strong>Scale Replica Build</strong>I recreate it by hand — exact livery, maximum detail, museum quality.</div></div>
+    <div class="story-step reveal"><div class="story-icon">📸</div><div class="story-text"><strong>Full Documentation</strong>Every build is photographed professionally before it ships.</div></div>
+    <div class="story-step reveal"><div class="story-icon">🏆</div><div class="story-text"><strong>Unique Collector Piece</strong>A one-of-a-kind object that tells the full story of your car.</div></div>
+  </div>
+  <div style="margin-top:40px;">
+    <a href="contact.html" class="btn btn-primary">Enquire About a Commission</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-brand">PJ'S <em>UNIVERSE</em></div>
+      <div class="footer-tagline">Scale Models · Race Photography · Automotive Art</div>
+      <p style="font-size:13px;color:var(--muted);max-width:280px;">"I shoot it at the track. Then I build it." — The story nobody else is telling.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Scaleworks</h4>
+      <a href="scaleworks.html">Shoot & Build</a>
+      <a href="parts.html">Aftermarket Parts</a>
+      <a href="https://www.etsy.com/be/shop/PjsuniverseShop" target="_blank">Etsy Shop</a>
+    </div>
+    <div class="footer-col">
+      <h4>Autography</h4>
+      <a href="autography.html">Race Day Packages</a>
+      <a href="portfolio.html">Portfolio</a>
+      <a href="contact.html">Book a Session</a>
+    </div>
+    <div class="footer-col">
+      <h4>Connect</h4>
+      <a href="https://facebook.com/pjsscaleworks" target="_blank">Scaleworks FB</a>
+      <a href="https://facebook.com/pjsautography" target="_blank">Autography FB</a>
+      <a href="contact.html">Get in Touch</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2026 PJ's Universe. All rights reserved.</div>
+    <div class="footer-copy">PJ's Scaleworks · PJ's Autography</div>
+  </div>
+</footer>
+
+<script src="shared.js"></script>
+</body>
+</html>
