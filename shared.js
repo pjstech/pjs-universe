@@ -1,8 +1,38 @@
 /* shared.js — PJ's Universe v3 */
 
-// ── Cursor ──
+// ── Racecar Cursor ──
 const cursor = document.getElementById('cursor');
 const ring   = document.getElementById('cursorRing');
+if (cursor) {
+  // Inject racecar SVG
+  cursor.innerHTML = `<svg viewBox="0 0 64 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <!-- Body -->
+    <path d="M4 18 L8 10 L18 7 L38 6 L52 9 L60 14 L60 18 L4 18Z" fill="#c0392b"/>
+    <!-- Cockpit -->
+    <path d="M20 10 L24 7 L36 7 L40 10Z" fill="#1a1a1a" opacity="0.8"/>
+    <!-- Windscreen -->
+    <path d="M22 10 L25 7.5 L35 7.5 L38 10Z" fill="#4a9edd" opacity="0.6"/>
+    <!-- Front wing -->
+    <path d="M52 17 L62 17 L62 20 L52 20Z" fill="#c0392b"/>
+    <!-- Rear wing -->
+    <path d="M2 13 L2 16 L8 16 L8 13Z" fill="#c0392b"/>
+    <path d="M2 13 L14 13 L14 15 L2 15Z" fill="#888"/>
+    <!-- Side pod detail -->
+    <rect x="30" y="8" width="16" height="3" rx="1" fill="#8e1b10" opacity="0.6"/>
+    <!-- Front wheel -->
+    <circle cx="50" cy="20" r="5" fill="#111"/>
+    <circle cx="50" cy="20" r="3" fill="#333"/>
+    <circle cx="50" cy="20" r="1.2" fill="#555"/>
+    <!-- Rear wheel -->
+    <circle cx="14" cy="20" r="6" fill="#111"/>
+    <circle cx="14" cy="20" r="3.5" fill="#333"/>
+    <circle cx="14" cy="20" r="1.4" fill="#555"/>
+    <!-- Racing number -->
+    <text x="26" y="16" font-size="7" fill="white" font-family="Arial" font-weight="bold" opacity="0.9">PJ</text>
+    <!-- Red stripe -->
+    <rect x="8" y="14" width="44" height="2" fill="#e8b422" opacity="0.7"/>
+  </svg>`;
+}
 if (cursor && ring) {
   let mx=0,my=0,rx=0,ry=0;
   document.addEventListener('mousemove', e => {
@@ -10,7 +40,7 @@ if (cursor && ring) {
     cursor.style.left=mx+'px'; cursor.style.top=my+'px';
   });
   (function animRing(){
-    rx+=(mx-rx)*.12; ry+=(my-ry)*.12;
+    rx+=(mx-rx)*.1; ry+=(my-ry)*.1;
     ring.style.left=rx+'px'; ring.style.top=ry+'px';
     requestAnimationFrame(animRing);
   })();
