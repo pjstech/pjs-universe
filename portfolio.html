@@ -3,30 +3,24 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Portfolio — PJ's Universe. Track photography and scale model builds.">
+<meta name="description" content="Portfolio — PJ's Universe. Track photography journal and scale model builds.">
 <title>Portfolio — PJ's Universe</title>
 <link rel="stylesheet" href="style.css">
 <style>
-.tab-bar{display:flex;gap:2px;margin-bottom:2px}
-.tab-btn{flex:1;padding:18px 24px;border:none;font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:700;letter-spacing:3px;text-transform:uppercase;transition:all 0.2s;background:var(--grey2);color:var(--muted)}
-.tab-btn.active{background:var(--red);color:white}
-.tab-btn:hover:not(.active){background:var(--grey3);color:var(--white)}
-.gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:2px}
-.gallery-item{position:relative;overflow:hidden;aspect-ratio:4/3;background:var(--grey2)}
-.gallery-item.square{aspect-ratio:1}
-.gallery-item img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.5s var(--ease);pointer-events:none;user-select:none;-webkit-user-drag:none}
-.gallery-item:hover img{transform:scale(1.04)}
-.overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.7) 0%,transparent 50%);opacity:0;transition:opacity 0.3s;display:flex;align-items:flex-end;padding:16px}
-.gallery-item:hover .overlay{opacity:1}
-.overlay-text{font-family:'Barlow Condensed',sans-serif;font-size:13px;letter-spacing:2px;text-transform:uppercase;color:white}
-.empty-state{grid-column:1/-1;padding:80px 40px;text-align:center;border:1px dashed rgba(255,255,255,0.06)}
-.empty-state h3{font-family:'Bebas Neue',sans-serif;font-size:32px;color:var(--muted);letter-spacing:2px;margin-bottom:12px}
-.empty-state p{font-size:14px;color:var(--muted)}
-@media(max-width:900px){.gallery{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:600px){.gallery{grid-template-columns:1fr}}
+.tab-bar{display:flex;gap:2px;margin-bottom:32px}
+.tab-btn{flex:1;padding:16px 20px;border:none;font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;letter-spacing:3px;text-transform:uppercase;transition:all .2s;background:var(--grey2);color:var(--muted);border-bottom:3px solid transparent}
+.tab-btn.active{background:var(--grey3);color:var(--white);border-bottom-color:var(--red)}
+.tab-btn:hover:not(.active){background:var(--grey3);color:var(--text)}
+.tab-content{display:none}
+.tab-content.active{display:block}
+.series-view{display:none}
+.series-view.active{display:block}
+.series-overview{display:block}
+.series-overview.hidden{display:none}
 </style>
 </head>
 <body>
+
 <div class="cursor" id="cursor"></div>
 <div class="cursor-ring" id="cursorRing"></div>
 <nav id="mainNav">
@@ -37,7 +31,8 @@
     <a href="autography.html">Autography</a>
     <a href="portfolio.html" class="active">Portfolio</a>
     <a href="parts.html">Parts</a>
-    <a href="contact.html" class="nav-cta">Book / Commission</a>
+    <a href="sorter.html">PJ Sorter</a>
+    <a href="contact.html" class="nav-cta">Contact</a>
   </div>
   <button class="nav-toggle" id="navToggle"><span></span><span></span><span></span></button>
 </nav>
@@ -48,39 +43,78 @@
   <a href="autography.html" onclick="closeMobile()">Autography</a>
   <a href="portfolio.html" onclick="closeMobile()">Portfolio</a>
   <a href="parts.html" onclick="closeMobile()">Parts</a>
-  <a href="contact.html" onclick="closeMobile()">Commission</a>
+  <a href="sorter.html" onclick="closeMobile()">PJ Sorter</a>
+  <a href="contact.html" onclick="closeMobile()">Contact</a>
 </div>
 
 <div class="page-hero" style="background:var(--grey);">
-  <div class="page-hero-bg" style="background:radial-gradient(ellipse 50% 70% at 80% 40%,rgba(192,57,43,0.07) 0%,transparent 70%);"></div>
+  <div class="page-hero-bg" style="background:radial-gradient(ellipse 50% 70% at 80% 40%,rgba(192,57,43,.06) 0%,transparent 70%);"></div>
   <div class="page-hero-num">PF</div>
-  <div class="page-hero-label">Work</div>
+  <div class="page-hero-label">Journal</div>
   <h1>PORT<br><em>FOLIO</em></h1>
-  <p>Track photography from PJ's Autography and scale builds from PJ's Scaleworks.</p>
+  <p>A journal of races photographed and models built — from the track to the workbench.</p>
 </div>
 
-<section>
+<section class="section">
+
+  <!-- TABS -->
   <div class="tab-bar">
-    <button class="tab-btn active" id="btn-track" onclick="showTab('track')">📷 Track Photography</button>
-    <button class="tab-btn" id="btn-builds" onclick="showTab('builds')">🔧 Scale Builds</button>
+    <button class="tab-btn active" onclick="switchTab('track')">📷 Track Photography</button>
+    <button class="tab-btn" onclick="switchTab('builds')">🔧 Scale Builds</button>
   </div>
 
-  <div id="gallery-track">
-    <div class="gallery">
-      <!-- ▼ TRACK PHOTOS — add yours below, see Photo Guide -->
-      <!-- <div class="gallery-item"><img src="photos/track/FILENAME.jpg" alt="Caption" draggable="false" oncontextmenu="return false;"><div class="overlay"><span class="overlay-text">Caption</span></div></div> -->
-      <div class="empty-state"><h3>Photos Coming Soon</h3><p>Racetrack photography from PJ's Autography — coming soon.</p></div>
+  <!-- TRACK TAB -->
+  <div class="tab-content active" id="tab-track">
+    <!-- SERIES OVERVIEW -->
+    <div class="series-overview" id="track-overview">
+      <div class="section-label" style="margin-bottom:12px;">Select a Series</div>
+      <div class="series-grid" id="track-series-grid">
+        <div style="grid-column:1/-1;padding:60px;text-align:center;border:1px dashed rgba(255,255,255,.06);">
+          <p style="color:var(--muted);font-size:14px;">Loading series...</p>
+        </div>
+      </div>
+    </div>
+    <!-- SERIES DETAIL VIEW -->
+    <div class="series-view" id="track-detail">
+      <div class="gallery-header">
+        <button class="back-btn" onclick="showOverview('track')">← Back to Series</button>
+        <h2 class="gallery-title" id="track-series-title"></h2>
+      </div>
+      <div class="gallery-grid" id="track-gallery"></div>
     </div>
   </div>
 
-  <div id="gallery-builds" style="display:none;">
-    <div class="gallery">
-      <!-- ▼ BUILD PHOTOS — add yours below, see Photo Guide -->
-      <!-- <div class="gallery-item square"><img src="photos/builds/FILENAME.jpg" alt="Build name" draggable="false" oncontextmenu="return false;"><div class="overlay"><span class="overlay-text">Build name</span></div></div> -->
-      <div class="empty-state"><h3>Builds Coming Soon</h3><p>Scale model builds from PJ's Scaleworks — coming soon.</p></div>
+  <!-- BUILDS TAB -->
+  <div class="tab-content" id="tab-builds">
+    <div class="series-overview" id="builds-overview">
+      <div class="section-label" style="margin-bottom:12px;">Select a Category</div>
+      <div class="series-grid" id="builds-series-grid">
+        <div style="grid-column:1/-1;padding:60px;text-align:center;border:1px dashed rgba(255,255,255,.06);">
+          <p style="color:var(--muted);font-size:14px;">Loading...</p>
+        </div>
+      </div>
+    </div>
+    <div class="series-view" id="builds-detail">
+      <div class="gallery-header">
+        <button class="back-btn" onclick="showOverview('builds')">← Back to Categories</button>
+        <h2 class="gallery-title" id="builds-series-title"></h2>
+      </div>
+      <div class="gallery-grid" id="builds-gallery"></div>
     </div>
   </div>
+
 </section>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+  <button class="lightbox-prev" onclick="lbPrev()">‹</button>
+  <img class="lightbox-img" src="" alt="" draggable="false" oncontextmenu="return false;">
+  <button class="lightbox-next" onclick="lbNext()">›</button>
+  <div class="lightbox-caption"></div>
+  <div class="lightbox-dots"></div>
+  <div class="lightbox-counter"></div>
+</div>
 
 <footer>
   <div class="footer-grid">
@@ -89,18 +123,122 @@
     <div class="footer-col"><h4>Autography</h4><a href="autography.html">Race Day Packages</a><a href="portfolio.html">Portfolio</a><a href="contact.html">Book a Session</a></div>
     <div class="footer-col"><h4>Connect</h4><a href="https://facebook.com/pjsscaleworks" target="_blank">Scaleworks FB</a><a href="https://facebook.com/pjsautography" target="_blank">Autography FB</a><a href="contact.html">Get in Touch</a></div>
   </div>
-  <div class="footer-bottom"><div class="footer-copy">© 2026 PJ's Universe. All rights reserved.</div></div>
+  <div class="footer-bottom"><div class="footer-copy">© 2026 PJ's Universe. All rights reserved.</div><div class="footer-copy">pjsuniverse.com</div></div>
 </footer>
+
 <script src="shared.js"></script>
 <script>
-function showTab(tab){
-  var track=document.getElementById('gallery-track');
-  var builds=document.getElementById('gallery-builds');
-  var btnT=document.getElementById('btn-track');
-  var btnB=document.getElementById('btn-builds');
-  if(tab==='track'){track.style.display='block';builds.style.display='none';btnT.classList.add('active');btnB.classList.remove('active');}
-  else{track.style.display='none';builds.style.display='block';btnB.classList.add('active');btnT.classList.remove('active');}
+let photoData = null;
+let activeTab = 'track';
+
+// Load photos.json once
+fetch('photos.json')
+  .then(r => r.json())
+  .then(data => {
+    photoData = data;
+    initTrack();
+    initBuilds();
+  })
+  .catch(() => {
+    document.getElementById('track-series-grid').innerHTML =
+      '<div style="grid-column:1/-1;padding:60px;text-align:center;"><p style="color:var(--muted);">No photos yet — check back soon!</p></div>';
+  });
+
+function initTrack() {
+  const series = photoData.track;
+  const grid = document.getElementById('track-series-grid');
+  const keys = Object.keys(series);
+  grid.innerHTML = keys.map(key => {
+    const s = series[key];
+    const count = s.photos ? s.photos.length : 0;
+    const cover = s.cover || (s.photos && s.photos[0] ? 'photos/track/' + key + '/' + s.photos[0] : '');
+    return `
+      <div class="series-card reveal" onclick="openSeries('track','${key}')">
+        ${cover ? `<img class="series-card-img" src="${cover}" alt="${s.label}" draggable="false" oncontextmenu="return false;" loading="lazy">` : `<div class="series-card-placeholder">🏎️</div>`}
+        <div class="series-card-bg"></div>
+        <div class="series-card-content">
+          <div class="series-card-label">Series</div>
+          <div class="series-card-title">${s.label}</div>
+          <div class="series-card-count">${count} photo${count!==1?'s':''}</div>
+        </div>
+      </div>`;
+  }).join('');
+  grid.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
 }
+
+function initBuilds() {
+  const cats = photoData.builds;
+  const grid = document.getElementById('builds-series-grid');
+  const keys = Object.keys(cats);
+  grid.innerHTML = keys.map(key => {
+    const c = cats[key];
+    const series = c.series || {};
+    const seriesKeys = Object.keys(series);
+    const count = seriesKeys.reduce((acc,k) => acc + (series[k].photos ? series[k].photos.length : 0), 0);
+    return `
+      <div class="series-card reveal" onclick="openSeries('builds','${key}')">
+        <div class="series-card-placeholder">${key==='3d-printed'?'🖨️':key==='aluminium'?'⚙️':'🎨'}</div>
+        <div class="series-card-bg"></div>
+        <div class="series-card-content">
+          <div class="series-card-label">Category</div>
+          <div class="series-card-title">${c.label}</div>
+          <div class="series-card-count">${count} photo${count!==1?'s':''}</div>
+        </div>
+      </div>`;
+  }).join('');
+  grid.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
+}
+
+function openSeries(tab, key) {
+  const data = photoData[tab][key];
+  if (!data) return;
+
+  const titleEl = document.getElementById(tab + '-series-title');
+  const galleryEl = document.getElementById(tab + '-gallery');
+  if (titleEl) titleEl.textContent = data.label;
+
+  // Build photo objects
+  let photos = [];
+  if (tab === 'track') {
+    photos = buildPhotoObjects('photos/track/' + key, data.photos);
+  } else {
+    // builds: show all series photos flattened
+    const series = data.series || {};
+    Object.keys(series).forEach(sk => {
+      photos = photos.concat(buildPhotoObjects('photos/builds/' + key + '/' + sk, series[sk].photos || []));
+    });
+  }
+
+  buildGallery(tab + '-gallery', photos);
+
+  // Show detail view
+  document.getElementById(tab + '-overview').classList.add('hidden');
+  document.getElementById(tab + '-detail').classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function showOverview(tab) {
+  document.getElementById(tab + '-overview').classList.remove('hidden');
+  document.getElementById(tab + '-detail').classList.remove('active');
+}
+
+function switchTab(tab) {
+  activeTab = tab;
+  document.querySelectorAll('.tab-btn').forEach((b,i) => {
+    b.classList.toggle('active', (i===0&&tab==='track')||(i===1&&tab==='builds'));
+  });
+  document.getElementById('tab-track').classList.toggle('active', tab==='track');
+  document.getElementById('tab-builds').classList.toggle('active', tab==='builds');
+}
+
+// expose ro for shared.js reveal observer
+var ro;
+document.addEventListener('DOMContentLoaded', () => {
+  ro = new IntersectionObserver(entries => {
+    entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+  }, {threshold:0.08});
+  document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
+});
 </script>
 </body>
 </html>

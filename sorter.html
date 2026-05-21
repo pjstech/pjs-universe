@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="PJ Sorter — The smart photo rating and sorting app for photographers.">
+<title>PJ Sorter — PJ's Universe</title>
+<link rel="stylesheet" href="style.css">
+<style>
+.sorter-hero{min-height:60vh;display:flex;flex-direction:column;justify-content:flex-end;padding:calc(var(--nav-h) + 60px) var(--pad) 64px;position:relative;overflow:hidden;border-bottom:1px solid var(--line)}
+.sorter-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 80% at 30% 50%,rgba(201,146,14,.07) 0%,transparent 70%);pointer-events:none}
+.sorter-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.012) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.012) 1px,transparent 1px);background-size:80px 80px}
+.sorter-num{position:absolute;right:-20px;bottom:-20px;font-family:'Bebas Neue',sans-serif;font-size:clamp(120px,20vw,300px);color:rgba(201,146,14,.04);line-height:1;user-select:none;pointer-events:none}
+.sorter-content{position:relative;z-index:1;max-width:700px}
+.coming-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(201,146,14,.12);border:1px solid rgba(201,146,14,.3);padding:6px 16px;font-family:'Barlow Condensed',sans-serif;font-size:11px;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:24px}
+.coming-dot{width:6px;height:6px;border-radius:50%;background:var(--gold);animation:blink 1.5s ease infinite}
+
+.features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin:48px 0}
+.feature-card{background:var(--grey2);padding:36px 28px;border-top:3px solid transparent;transition:border-color .3s,background .3s}
+.feature-card:hover{border-top-color:var(--gold);background:var(--grey3)}
+.feature-icon{font-size:36px;margin-bottom:16px}
+.feature-title{font-family:'Barlow Condensed',sans-serif;font-size:18px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--white);margin-bottom:8px}
+.feature-desc{font-size:13px;color:var(--muted);line-height:1.7}
+
+.notify-box{background:linear-gradient(135deg,#0f0a00,var(--grey2));border:1px solid rgba(201,146,14,.25);padding:48px;text-align:center;margin:48px 0}
+.notify-box h3{font-family:'Bebas Neue',sans-serif;font-size:40px;letter-spacing:2px;color:var(--white);margin-bottom:8px}
+.notify-box p{font-size:14px;color:var(--muted);max-width:400px;margin:0 auto 28px}
+.notify-form{display:flex;gap:8px;max-width:440px;margin:0 auto;flex-wrap:wrap}
+.notify-input{flex:1;background:var(--grey2);border:1px solid var(--line);color:var(--white);padding:13px 16px;font-family:'Barlow',sans-serif;font-size:14px;outline:none;transition:border-color .2s;min-width:200px}
+.notify-input:focus{border-color:var(--gold)}
+.notify-btn{background:var(--gold);color:var(--black);border:none;padding:13px 24px;font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;letter-spacing:3px;text-transform:uppercase;transition:background .2s;white-space:nowrap}
+.notify-btn:hover{background:var(--gold-l)}
+.notify-success{display:none;color:var(--gold);font-size:14px;margin-top:12px}
+
+.how-it-works{display:flex;flex-direction:column;gap:2px;margin:32px 0}
+.how-step{display:flex;gap:24px;align-items:flex-start;padding:20px 24px;background:var(--grey2);border-left:3px solid transparent;transition:border-color .3s}
+.how-step:hover{border-left-color:var(--gold)}
+.how-num{font-family:'Bebas Neue',sans-serif;font-size:44px;color:rgba(201,146,14,.3);line-height:1;flex-shrink:0;width:44px}
+.how-title{font-family:'Barlow Condensed',sans-serif;font-size:16px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--white);margin-bottom:4px}
+.how-desc{font-size:13px;color:var(--muted);line-height:1.7}
+
+@media(max-width:900px){
+  .sorter-hero{padding:calc(var(--nav-h) + 40px) 20px 48px}
+  .sorter-num{display:none}
+  .features-grid{grid-template-columns:1fr}
+  .notify-form{flex-direction:column}
+  .notify-input,.notify-btn{width:100%}
+}
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+<nav id="mainNav">
+  <a href="index.html" class="nav-logo">PJ'S <em>UNIVERSE</em> <span class="nav-dot"></span></a>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="scaleworks.html">Scaleworks</a>
+    <a href="autography.html">Autography</a>
+    <a href="portfolio.html">Portfolio</a>
+    <a href="parts.html">Parts</a>
+    <a href="sorter.html" class="active">PJ Sorter</a>
+    <a href="contact.html" class="nav-cta">Contact</a>
+  </div>
+  <button class="nav-toggle" id="navToggle"><span></span><span></span><span></span></button>
+</nav>
+<div class="mobile-nav" id="mobileNav">
+  <button class="mobile-close" id="mobileClose">✕</button>
+  <a href="index.html" onclick="closeMobile()">Home</a>
+  <a href="scaleworks.html" onclick="closeMobile()">Scaleworks</a>
+  <a href="autography.html" onclick="closeMobile()">Autography</a>
+  <a href="portfolio.html" onclick="closeMobile()">Portfolio</a>
+  <a href="parts.html" onclick="closeMobile()">Parts</a>
+  <a href="sorter.html" onclick="closeMobile()">PJ Sorter</a>
+  <a href="contact.html" onclick="closeMobile()">Contact</a>
+</div>
+
+<div class="sorter-hero">
+  <div class="sorter-grid"></div>
+  <div class="sorter-num">PJS</div>
+  <div class="sorter-content">
+    <div class="coming-badge"><div class="coming-dot"></div>Coming Soon</div>
+    <div class="page-hero-label gold" style="position:relative;z-index:1;">PJ's Universe</div>
+    <h1 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(56px,10vw,110px);line-height:.9;color:var(--white);letter-spacing:2px;margin-bottom:16px;position:relative;z-index:1;">PJ <em style="color:var(--gold);font-style:normal;">SORTER</em></h1>
+    <p style="font-size:16px;color:var(--muted);max-width:480px;line-height:1.8;position:relative;z-index:1;">The smart photo rating and sorting app built by a photographer, for photographers. Rate your shots fast, sort the keepers, ship your best work.</p>
+  </div>
+</div>
+
+<section class="section dark">
+  <div class="section-label gold">What It Does</div>
+  <h2 class="section-title">SORT FASTER.<br>SHOOT BETTER.</h2>
+  <p class="section-body">After every race day you come home with hundreds of shots. PJ Sorter helps you cut through them fast — rate, tag, sort, and export your best work in a fraction of the time.</p>
+
+  <div class="features-grid">
+    <div class="feature-card reveal">
+      <div class="feature-icon">⚡</div>
+      <div class="feature-title">Rate in Seconds</div>
+      <div class="feature-desc">Keyboard-driven rating system lets you blaze through hundreds of photos at speed. One key press per photo — keep or cull.</div>
+    </div>
+    <div class="feature-card reveal">
+      <div class="feature-icon">📂</div>
+      <div class="feature-title">Smart Sorting</div>
+      <div class="feature-desc">Automatically organises your rated photos into folders. Your 5-stars ready to export, your rejects out of the way.</div>
+    </div>
+    <div class="feature-card reveal">
+      <div class="feature-icon">🏎️</div>
+      <div class="feature-title">Built for Race Photography</div>
+      <div class="feature-desc">Designed around the workflow of a motorsport photographer. Series tagging, event labelling, batch delivery — all built in.</div>
+    </div>
+    <div class="feature-card reveal">
+      <div class="feature-icon">🔒</div>
+      <div class="feature-title">Works Offline</div>
+      <div class="feature-desc">No internet required. Works on your laptop in the car park right after the race. Your photos stay on your machine.</div>
+    </div>
+    <div class="feature-card reveal">
+      <div class="feature-icon">📊</div>
+      <div class="feature-title">Shoot Analytics</div>
+      <div class="feature-desc">See your keeper rate, your best events, your most consistent sessions. Learn from your data and improve every race day.</div>
+    </div>
+    <div class="feature-card reveal">
+      <div class="feature-icon">🎯</div>
+      <div class="feature-title">AI-Assisted Rating</div>
+      <div class="feature-desc">Optional AI suggestions flag your sharpest, best-composed shots first. You make the final call — AI just saves you time.</div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-label gold">How It Works</div>
+  <h2 class="section-title">THREE STEPS<br>TO YOUR BEST SHOTS</h2>
+  <div class="how-it-works">
+    <div class="how-step reveal">
+      <div class="how-num">1</div>
+      <div><div class="how-title">Import Your Shoot</div><div class="how-desc">Point PJ Sorter at your photo folder — from your SD card, hard drive or wherever you store your RAWs. It loads your shoot instantly.</div></div>
+    </div>
+    <div class="how-step reveal">
+      <div class="how-num">2</div>
+      <div><div class="how-title">Rate at Speed</div><div class="how-desc">Keyboard shortcuts let you rate 1–5 stars, flag keepers, or mark rejects without touching the mouse. Work through 500 photos in minutes.</div></div>
+    </div>
+    <div class="how-step reveal">
+      <div class="how-num">3</div>
+      <div><div class="how-title">Export & Deliver</div><div class="how-desc">Your sorted photos export into organised folders, ready for Lightroom, delivery to clients, or upload to your portfolio.</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section dark">
+  <div class="notify-box">
+    <h3>BE FIRST TO <em style="color:var(--gold);font-style:normal;">KNOW</em></h3>
+    <p>PJ Sorter is in development. Leave your email and you'll be the first to hear when it launches — plus an early-bird discount.</p>
+    <div class="notify-form">
+      <input class="notify-input" type="email" id="notify-email" placeholder="your@email.com">
+      <button class="notify-btn" onclick="notifySignup()">Notify Me →</button>
+    </div>
+    <div class="notify-success" id="notify-success">✓ You're on the list! We'll be in touch.</div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-grid">
+    <div><div class="footer-brand">PJ'S <em>UNIVERSE</em></div><div class="footer-tagline">Scale Models · Race Photography · Automotive Art</div></div>
+    <div class="footer-col"><h4>Scaleworks</h4><a href="scaleworks.html">Shoot & Build</a><a href="parts.html">Aftermarket Parts</a><a href="https://www.etsy.com/be/shop/PjsuniverseShop" target="_blank">Etsy Shop</a></div>
+    <div class="footer-col"><h4>Autography</h4><a href="autography.html">Race Day Packages</a><a href="portfolio.html">Portfolio</a><a href="contact.html">Book a Session</a></div>
+    <div class="footer-col"><h4>Connect</h4><a href="https://facebook.com/pjsscaleworks" target="_blank">Scaleworks FB</a><a href="https://facebook.com/pjsautography" target="_blank">Autography FB</a><a href="contact.html">Get in Touch</a></div>
+  </div>
+  <div class="footer-bottom"><div class="footer-copy">© 2026 PJ's Universe. All rights reserved.</div><div class="footer-copy">pjsuniverse.com</div></div>
+</footer>
+
+<script src="shared.js"></script>
+<script>
+function notifySignup() {
+  const email = document.getElementById('notify-email').value;
+  if (!email || !email.includes('@')) return;
+  // Opens mailto as simple capture — replace with proper form endpoint later
+  window.location.href = 'mailto:pjsscaleworks@hotmail.com?subject=PJ Sorter Notify&body=Please notify me when PJ Sorter launches: ' + email;
+  document.getElementById('notify-success').style.display = 'block';
+  document.getElementById('notify-email').value = '';
+}
+</script>
+</body>
+</html>
