@@ -13,9 +13,8 @@
   position:relative;
   overflow:hidden;
   display:flex;
-  flex-direction:column;
-  justify-content:flex-end;
-  padding:0 var(--pad) 80px;
+  align-items:center;
+  padding:var(--nav-h) var(--pad) 80px;
 }
 
 /* Background photo layer */
@@ -82,8 +81,8 @@
   width:100%;
   display:grid;
   grid-template-columns:1fr 1fr;
-  align-items:end;
-  gap:64px;
+  align-items:center;
+  gap:80px;
 }
 
 .hero-left {}
@@ -103,8 +102,8 @@
 
 .hero-h1 {
   font-family:'Bebas Neue',sans-serif;
-  font-size:clamp(64px,8vw,120px);
-  line-height:.88; letter-spacing:2px;
+  font-size:clamp(48px,5.5vw,88px);
+  line-height:.92; letter-spacing:3px;
   color:var(--white); margin-bottom:0;
   opacity:0; animation:fadeUp .8s .4s var(--ease) forwards;
 }
@@ -268,8 +267,8 @@
   .story-grid{grid-template-columns:repeat(2,1fr)}
 }
 @media(max-width:900px){
-  .hero{padding:0 var(--pad-sm) 72px}
-  .hero-h1{font-size:clamp(52px,14vw,88px)}
+  .hero{padding:calc(var(--nav-h) + 20px) var(--pad-sm) 80px;align-items:flex-end}
+  .hero-h1{font-size:clamp(44px,12vw,72px)}
   .hero-actions{flex-direction:column}
   .hero-actions .btn{width:100%;justify-content:center}
   .hero-scroll{display:none}
@@ -278,7 +277,7 @@
   .story-grid{grid-template-columns:1fr 1fr}
 }
 @media(max-width:600px){
-  .hero-h1{font-size:clamp(44px,16vw,72px)}
+  .hero-h1{font-size:clamp(40px,14vw,64px)}
   .stat-item{padding:24px 16px}
   .stat-num{font-size:36px}
   .story-grid{grid-template-columns:1fr}
@@ -356,7 +355,7 @@
     </div>
     <div class="hero-right">
       <div class="hero-tagline">
-        Professional scale model builder and racetrack photographer. I capture the real car at the event — then recreate it in 1:18 on my workbench.
+        Professional scale model builder and racetrack photographer. I capture the real car at the event — then recreate it in scaleon my workbench.
       </div>
       <div class="hero-divider"></div>
       <div class="hero-actions">
@@ -409,7 +408,7 @@
 <section class="section">
   <div class="section-label">The Process</div>
   <h2 class="section-title">SHOOT &amp; BUILD —<br>THE FULL STORY</h2>
-  <p class="section-body">One car. Two perspectives. The real thing captured at speed — then recreated in 1:18 on my workbench. This is the story nobody else is telling.</p>
+  <p class="section-body">One car. Two perspectives. The real thing captured at speed — then recreated in scaleon my workbench. This is the story nobody else is telling.</p>
 
   <div class="story-grid">
     <div class="story-card reveal">
