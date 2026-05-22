@@ -7,22 +7,23 @@
 <title>PJ's Universe — Home</title>
 <link rel="stylesheet" href="style.css">
 <style>
-.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:flex-end;padding:0 var(--pad) 72px;position:relative;overflow:hidden}
+.hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;align-items:end;padding:var(--nav-h) var(--pad) 80px;position:relative;overflow:hidden;gap:48px}
 .hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 60% 60% at 70% 40%,rgba(192,57,43,.07) 0%,transparent 70%),radial-gradient(ellipse 40% 40% at 20% 80%,rgba(201,146,14,.04) 0%,transparent 60%)}
 .hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.012) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.012) 1px,transparent 1px);background-size:80px 80px}
 .speed-line{position:absolute;top:0;bottom:0;width:1px;background:linear-gradient(to bottom,transparent,rgba(192,57,43,.12) 40%,rgba(192,57,43,.12) 60%,transparent);animation:spd 3s ease-in-out infinite}
 .speed-line:nth-child(2){left:28%;animation-delay:1.5s}
 .speed-line:nth-child(3){left:64%}
 @keyframes spd{0%{opacity:0;transform:scaleY(0) translateY(-50%)}50%{opacity:1;transform:scaleY(1)}100%{opacity:0;transform:scaleY(0) translateY(50%)}}
-.hero-num{position:absolute;right:-30px;top:50%;transform:translateY(-50%);font-family:'Bebas Neue',sans-serif;font-size:clamp(200px,28vw,440px);color:rgba(192,57,43,.035);line-height:1;letter-spacing:-10px;user-select:none;pointer-events:none}
-.hero-content{position:relative;z-index:1;max-width:860px}
+.hero-num{position:absolute;right:-30px;top:50%;transform:translateY(-50%);font-family:'Bebas Neue',sans-serif;font-size:clamp(200px,22vw,360px);color:rgba(192,57,43,.03);line-height:1;letter-spacing:-10px;user-select:none;pointer-events:none}
+.hero-left{position:relative;z-index:1;}
+.hero-right{position:relative;z-index:1;display:flex;flex-direction:column;justify-content:flex-end;padding-bottom:8px}
 .hero-label{font-family:'Barlow Condensed',sans-serif;font-size:11px;letter-spacing:7px;text-transform:uppercase;color:var(--red);margin-bottom:20px;opacity:0;animation:fadeUp 1s .2s var(--ease) forwards}
-.hero h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(64px,12vw,148px);line-height:.88;color:var(--white);letter-spacing:2px;margin-bottom:28px;opacity:0;animation:fadeUp 1s .4s var(--ease) forwards}
+.hero h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(56px,7vw,110px);line-height:.9;color:var(--white);letter-spacing:2px;margin-bottom:0;opacity:0;animation:fadeUp 1s .4s var(--ease) forwards}
 .hero h1 em{color:var(--red);font-style:normal;display:block}
 .hero h1 .g{color:var(--gold-l)}
-.hero-sub{font-size:16px;color:var(--muted);max-width:500px;line-height:1.8;margin-bottom:44px;opacity:0;animation:fadeUp 1s .6s var(--ease) forwards}
+.hero-sub{font-size:16px;color:var(--muted);line-height:1.8;margin-bottom:40px;opacity:0;animation:fadeUp 1s .6s var(--ease) forwards}
 .hero-actions{display:flex;gap:12px;flex-wrap:wrap;opacity:0;animation:fadeUp 1s .8s var(--ease) forwards}
-.hero-scroll{position:absolute;bottom:32px;right:var(--pad);display:flex;align-items:center;gap:10px;font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:4px;text-transform:uppercase;color:var(--muted);opacity:0;animation:fadeUp 1s 1.2s var(--ease) forwards}
+.hero-scroll{position:absolute;bottom:32px;right:var(--pad);display:flex;align-items:center;gap:10px;font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:4px;text-transform:uppercase;color:var(--muted);opacity:0;animation:fadeUp 1s 1.2s var(--ease) forwards;z-index:1}
 .scroll-line{width:36px;height:1px;background:var(--muted);animation:pulse 2s ease infinite}
 @keyframes fadeUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
 @keyframes pulse{0%,100%{opacity:.3}50%{opacity:1}}
@@ -54,8 +55,12 @@
 .story-text strong{display:block;font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--white);margin-bottom:2px}
 .story-text{font-size:13px;color:var(--muted)}
 
+@media(max-width:1100px){
+  .hero{grid-template-columns:1fr;align-items:start;padding-top:calc(var(--nav-h) + 60px)}
+  .hero-right{padding-bottom:0}
+}
 @media(max-width:900px){
-  .hero{padding:0 var(--pad-sm) 64px}
+  .hero{padding:calc(var(--nav-h) + 40px) var(--pad-sm) 64px;grid-template-columns:1fr;gap:24px}
   .hero-num{display:none}
   .hero h1{font-size:clamp(52px,14vw,88px)}
   .hero-actions{flex-direction:column;align-items:flex-start}
@@ -79,11 +84,30 @@
   <a href="index.html" class="nav-logo">PJ'S <em>UNIVERSE</em> <span class="nav-dot"></span></a>
   <div class="nav-links">
     <a href="index.html" class="active">Home</a>
-    <a href="scaleworks.html">Scaleworks</a>
-    <a href="autography.html">Autography</a>
-    <a href="portfolio.html">Portfolio</a>
-    <a href="parts.html">Parts</a>
-    <a href="sorter.html">PJ Sorter</a>
+    <div class="nav-dropdown">
+      <a href="scaleworks.html" class="">Scaleworks <span class="nav-dropdown-arrow">▾</span></a>
+      <div class="dropdown-menu">
+        <div class="dropdown-label">Scaleworks</div>
+        <a href="scaleworks.html">Shoot & Build</a>
+        <a href="parts.html">Aftermarket Parts</a>
+        <a href="https://www.etsy.com/be/shop/PjsuniverseShop" target="_blank">Etsy Shop</a>
+        <div class="dropdown-divider"></div>
+        <div class="dropdown-label">Digital</div>
+        <a href="https://www.etsy.com/be/shop/PjsuniverseShop" target="_blank">Build Guides</a>
+      </div>
+    </div>
+    <div class="nav-dropdown">
+      <a href="autography.html" class="">Autography <span class="nav-dropdown-arrow">▾</span></a>
+      <div class="dropdown-menu">
+        <div class="dropdown-label">Photography</div>
+        <a href="autography.html">Race Day Packages</a>
+        <a href="portfolio.html">Photo Portfolio</a>
+        <a href="contact.html">Book a Session</a>
+      </div>
+    </div>
+    <a href="portfolio.html" class="">Portfolio</a>
+    <a href="parts.html" class="">Parts</a>
+    <a href="sorter.html" class="">PJ Sorter</a>
     <a href="contact.html" class="nav-cta">Contact</a>
   </div>
   <button class="nav-toggle" id="navToggle"><span></span><span></span><span></span></button>
@@ -104,9 +128,11 @@
   <div class="speed-line"></div>
   <div class="speed-line"></div>
   <div class="hero-num">PJ</div>
-  <div class="hero-content">
+  <div class="hero-left">
     <div class="hero-label">Scale Models · Race Photography · Automotive Art</div>
     <h1>I Shoot It.<br><em>Then I</em><br><span class="g">Build It.</span></h1>
+  </div>
+  <div class="hero-right">
     <p class="hero-sub">Professional scale model builder and automotive photographer. Two brands, one obsession — the cars that make your pulse race.</p>
     <div class="hero-actions">
       <a href="scaleworks.html" class="btn btn-primary">🔧 Commission a Build</a>
