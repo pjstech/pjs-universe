@@ -79,22 +79,28 @@
   position:relative; z-index:3;
   max-width:var(--max-w);
   width:100%;
-  display:grid;
-  grid-template-columns:1fr 1fr;
+  display:flex;
+  flex-direction:column;
   align-items:center;
-  gap:80px;
+  text-align:center;
+  gap:32px;
 }
 
-.hero-left {}
+.hero-left { width:100%; }
 
 .hero-eyebrow {
   font-family:'Barlow Condensed',sans-serif;
   font-size:11px; letter-spacing:8px; text-transform:uppercase;
   color:var(--red); margin-bottom:20px;
-  display:flex; align-items:center; gap:12px;
+  display:flex; align-items:center; justify-content:center; gap:12px;
   opacity:0; animation:fadeUp .8s .2s var(--ease) forwards;
 }
 .hero-eyebrow::before {
+  content:'';
+  width:32px; height:1px; background:var(--red);
+  flex-shrink:0;
+}
+.hero-eyebrow::after {
   content:'';
   width:32px; height:1px; background:var(--red);
   flex-shrink:0;
@@ -127,17 +133,20 @@
 
 .hero-right {
   display:flex; flex-direction:column;
-  justify-content:flex-end; gap:28px;
+  align-items:center; gap:24px;
   opacity:0; animation:fadeUp .8s .6s var(--ease) forwards;
+  max-width:560px;
 }
 
 .hero-tagline {
   font-size:clamp(14px,1.2vw,17px);
   color:rgba(255,255,255,.55);
   line-height:1.85;
-  max-width:420px;
-  border-left:2px solid var(--red);
-  padding-left:20px;
+  text-align:center;
+  border-left:none;
+  padding-left:0;
+  border-top:1px solid rgba(192,57,43,.4);
+  padding-top:20px;
 }
 
 .hero-divider {
@@ -383,7 +392,7 @@
 <!-- ═══ BRANDS ═══ -->
 <section class="section dark">
   <div class="section-label">The Brands</div>
-  <h2 class="section-title">TWO BRANDS,<br>ONE PASSION</h2>
+  <h2 class="section-title">TWO BRANDS, ONE PASSION</h2>
   <div class="brand-grid">
     <a href="scaleworks.html" class="brand-card red reveal">
       <div class="bc-watermark">S</div>
@@ -405,7 +414,7 @@
 <!-- ═══ STORY ═══ -->
 <section class="section">
   <div class="section-label">The Process</div>
-  <h2 class="section-title">SHOOT &amp; BUILD —<br>THE FULL STORY</h2>
+  <h2 class="section-title">SHOOT &amp; BUILD — THE FULL STORY</h2>
   <p class="section-body">One car. Two perspectives. The real thing captured at speed — then recreated in scaleon my workbench. This is the story nobody else is telling.</p>
 
   <div class="story-grid">

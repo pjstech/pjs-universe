@@ -164,10 +164,10 @@ nav.scrolled { background:rgba(7,7,7,.95); border-color:var(--line); backdrop-fi
 /* ── SECTIONS ── */
 .section { padding:96px var(--pad); border-bottom:1px solid var(--line); }
 .section.dark { background:var(--grey); }
-.section-label { font-family:'Barlow Condensed',sans-serif; font-size:11px; letter-spacing:7px; text-transform:uppercase; color:var(--red); margin-bottom:8px; }
+.section-label { font-family:'Barlow Condensed',sans-serif; font-size:11px; letter-spacing:7px; text-transform:uppercase; color:var(--red); margin-bottom:8px; text-align:center; }
 .section-label.gold { color:var(--gold); }
-.section-title { font-family:'Bebas Neue',sans-serif; font-size:clamp(40px,4vw,68px); line-height:.92; color:var(--white); letter-spacing:2px; margin-bottom:24px; }
-.section-body { font-size:15px; color:var(--muted); max-width:560px; line-height:1.9; margin-bottom:32px; }
+.section-title { font-family:'Bebas Neue',sans-serif; font-size:clamp(36px,3.5vw,60px); line-height:1; color:var(--white); letter-spacing:2px; margin-bottom:24px; text-align:center; white-space:nowrap; }
+.section-body { font-size:15px; color:var(--muted); max-width:640px; line-height:1.9; margin-bottom:32px; text-align:center; margin-left:auto; margin-right:auto; }
 
 /* ── BUTTONS ── */
 .btn { display:inline-flex; align-items:center; gap:10px; padding:14px 28px; font-family:'Barlow Condensed',sans-serif; font-size:13px; font-weight:700; letter-spacing:3px; text-transform:uppercase; text-decoration:none; transition:all .25s var(--ease); }
@@ -267,6 +267,8 @@ footer { background:var(--grey); border-top:1px solid var(--line); padding:64px 
   .page-hero-num { display:none; }
   .page-hero h1 { font-size:clamp(44px,12vw,72px); }
   .section { padding:56px 20px; }
+  .section-title { white-space:normal; font-size:clamp(28px,7vw,44px); }
+  .section-body { text-align:center; }
   .series-grid { grid-template-columns:1fr; }
   .gallery-grid { grid-template-columns:repeat(2,1fr); }
   .footer-grid { grid-template-columns:1fr 1fr; gap:28px; }
