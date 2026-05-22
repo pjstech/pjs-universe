@@ -137,7 +137,14 @@ nav.scrolled { background:rgba(7,7,7,.95); border-color:var(--line); backdrop-fi
 .page-hero-left { width:100%; }
 .page-hero-right { width:100%; max-width:640px; }
 .page-hero-label { margin-bottom:12px; }
-.page-hero h1 { margin-bottom:24px; }
+.page-hero h1 {
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(40px,4.5vw,72px);
+  line-height:1; letter-spacing:3px;
+  color:var(--white);
+  margin-bottom:20px;
+  white-space:nowrap;
+}
 .page-hero p {
   font-size:16px; color:var(--muted);
   max-width:600px; margin:0 auto;
