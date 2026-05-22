@@ -1,0 +1,11 @@
+{
+  "name": "pjs-universe",
+  "version": "1.0.0",
+  "description": "PJ's Universe — Scaleworks & Autography",
+  "scripts": {
+    "build": "node build.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

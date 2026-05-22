@@ -3,76 +3,286 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="PJ's Universe — Professional scale model builds & racetrack photography. I shoot it. Then I build it.">
-<title>PJ's Universe — Home</title>
+<meta name="description" content="PJ's Universe — Professional scale model builds & racetrack photography. Shoot & Build.">
+<title>PJ's Universe — Shoot & Build</title>
 <link rel="stylesheet" href="style.css">
 <style>
-.hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;align-items:end;padding:var(--nav-h) var(--pad) 80px;position:relative;overflow:hidden;gap:48px}
-.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 60% 60% at 70% 40%,rgba(192,57,43,.07) 0%,transparent 70%),radial-gradient(ellipse 40% 40% at 20% 80%,rgba(201,146,14,.04) 0%,transparent 60%)}
-.hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.012) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.012) 1px,transparent 1px);background-size:80px 80px}
-.speed-line{position:absolute;top:0;bottom:0;width:1px;background:linear-gradient(to bottom,transparent,rgba(192,57,43,.12) 40%,rgba(192,57,43,.12) 60%,transparent);animation:spd 3s ease-in-out infinite}
-.speed-line:nth-child(2){left:28%;animation-delay:1.5s}
-.speed-line:nth-child(3){left:64%}
-@keyframes spd{0%{opacity:0;transform:scaleY(0) translateY(-50%)}50%{opacity:1;transform:scaleY(1)}100%{opacity:0;transform:scaleY(0) translateY(50%)}}
-.hero-num{position:absolute;right:-30px;top:50%;transform:translateY(-50%);font-family:'Bebas Neue',sans-serif;font-size:clamp(200px,22vw,360px);color:rgba(192,57,43,.03);line-height:1;letter-spacing:-10px;user-select:none;pointer-events:none}
-.hero-left{position:relative;z-index:1;}
-.hero-right{position:relative;z-index:1;display:flex;flex-direction:column;justify-content:flex-end;padding-bottom:8px}
-.hero-label{font-family:'Barlow Condensed',sans-serif;font-size:11px;letter-spacing:7px;text-transform:uppercase;color:var(--red);margin-bottom:20px;opacity:0;animation:fadeUp 1s .2s var(--ease) forwards}
-.hero h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(56px,7vw,110px);line-height:.9;color:var(--white);letter-spacing:2px;margin-bottom:0;opacity:0;animation:fadeUp 1s .4s var(--ease) forwards}
-.hero h1 em{color:var(--red);font-style:normal;display:block}
-.hero h1 .g{color:var(--gold-l)}
-.hero-sub{font-size:16px;color:var(--muted);line-height:1.8;margin-bottom:40px;opacity:0;animation:fadeUp 1s .6s var(--ease) forwards}
-.hero-actions{display:flex;gap:12px;flex-wrap:wrap;opacity:0;animation:fadeUp 1s .8s var(--ease) forwards}
-.hero-scroll{position:absolute;bottom:32px;right:var(--pad);display:flex;align-items:center;gap:10px;font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:4px;text-transform:uppercase;color:var(--muted);opacity:0;animation:fadeUp 1s 1.2s var(--ease) forwards;z-index:1}
-.scroll-line{width:36px;height:1px;background:var(--muted);animation:pulse 2s ease infinite}
-@keyframes fadeUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
-@keyframes pulse{0%,100%{opacity:.3}50%{opacity:1}}
+/* ── HERO ── */
+.hero {
+  min-height:100vh;
+  position:relative;
+  overflow:hidden;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-end;
+  padding:0 var(--pad) 80px;
+}
 
+/* Background photo layer */
+.hero-photo {
+  position:absolute; inset:0; z-index:0;
+  background:
+    /* Replace this with: background-image:url('photos/hero.jpg'); */
+    linear-gradient(135deg, #0a0000 0%, #1a0800 30%, #0a0505 60%, #050008 100%);
+  background-size:cover;
+  background-position:center;
+  transform:scale(1.05);
+  animation:heroZoom 20s ease-in-out infinite alternate;
+}
+@keyframes heroZoom {
+  from { transform:scale(1.05); }
+  to   { transform:scale(1.12); }
+}
+
+/* Cinematic overlay — dark vignette + colour grade */
+.hero-overlay {
+  position:absolute; inset:0; z-index:1;
+  background:
+    linear-gradient(to top,
+      rgba(0,0,0,.92) 0%,
+      rgba(0,0,0,.5) 40%,
+      rgba(0,0,0,.2) 70%,
+      rgba(0,0,0,.4) 100%),
+    linear-gradient(to right,
+      rgba(192,57,43,.08) 0%,
+      transparent 60%);
+}
+
+/* Subtle film grain */
+.hero-grain {
+  position:absolute; inset:0; z-index:2;
+  opacity:.04;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  pointer-events:none;
+}
+
+/* Speed lines overlay */
+.hero-lines {
+  position:absolute; inset:0; z-index:2;
+  overflow:hidden; pointer-events:none;
+}
+.hero-lines span {
+  position:absolute; top:0; bottom:0; width:1px;
+  background:linear-gradient(to bottom,transparent,rgba(192,57,43,.1) 40%,rgba(192,57,43,.1) 60%,transparent);
+  animation:spd 4s ease-in-out infinite;
+}
+.hero-lines span:nth-child(1){left:20%; animation-delay:0s}
+.hero-lines span:nth-child(2){left:50%; animation-delay:2s}
+.hero-lines span:nth-child(3){left:80%; animation-delay:1s}
+@keyframes spd{
+  0%{opacity:0;transform:scaleY(0) translateY(-100%)}
+  50%{opacity:1;transform:scaleY(1)}
+  100%{opacity:0;transform:scaleY(0) translateY(100%)}
+}
+
+/* Hero content */
+.hero-content {
+  position:relative; z-index:3;
+  max-width:var(--max-w);
+  width:100%;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  align-items:end;
+  gap:64px;
+}
+
+.hero-left {}
+
+.hero-eyebrow {
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:11px; letter-spacing:8px; text-transform:uppercase;
+  color:var(--red); margin-bottom:20px;
+  display:flex; align-items:center; gap:12px;
+  opacity:0; animation:fadeUp .8s .2s var(--ease) forwards;
+}
+.hero-eyebrow::before {
+  content:'';
+  width:32px; height:1px; background:var(--red);
+  flex-shrink:0;
+}
+
+.hero-h1 {
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(64px,8vw,120px);
+  line-height:.88; letter-spacing:2px;
+  color:var(--white); margin-bottom:0;
+  opacity:0; animation:fadeUp .8s .4s var(--ease) forwards;
+}
+.hero-h1 .line-red { color:var(--red); display:block; }
+.hero-h1 .line-gold { color:var(--gold-l); display:block; }
+
+/* Ampersand accent */
+.hero-amp {
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(80px,12vw,180px);
+  color:rgba(192,57,43,.15);
+  line-height:1;
+  position:absolute;
+  left:calc(var(--pad) + 2px);
+  bottom:calc(80px + clamp(64px,8vw,120px) * .88 * 2);
+  z-index:2;
+  pointer-events:none;
+  animation:fadeUp .8s .3s var(--ease) forwards;
+  opacity:0;
+}
+
+.hero-right {
+  display:flex; flex-direction:column;
+  justify-content:flex-end; gap:28px;
+  opacity:0; animation:fadeUp .8s .6s var(--ease) forwards;
+}
+
+.hero-tagline {
+  font-size:clamp(14px,1.2vw,17px);
+  color:rgba(255,255,255,.55);
+  line-height:1.85;
+  max-width:420px;
+  border-left:2px solid var(--red);
+  padding-left:20px;
+}
+
+.hero-divider {
+  width:48px; height:2px;
+  background:linear-gradient(to right, var(--red), var(--gold));
+}
+
+.hero-actions {
+  display:flex; gap:12px; flex-wrap:wrap;
+}
+
+/* Scroll indicator */
+.hero-scroll {
+  position:absolute;
+  bottom:32px; left:50%;
+  transform:translateX(-50%);
+  z-index:3;
+  display:flex; flex-direction:column; align-items:center; gap:8px;
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:10px; letter-spacing:4px; text-transform:uppercase;
+  color:rgba(255,255,255,.3);
+  opacity:0; animation:fadeUp .8s 1.4s var(--ease) forwards;
+}
+.scroll-mouse {
+  width:22px; height:34px;
+  border:1px solid rgba(255,255,255,.2);
+  border-radius:11px;
+  display:flex; justify-content:center; padding-top:6px;
+}
+.scroll-dot {
+  width:3px; height:6px;
+  background:var(--red);
+  border-radius:2px;
+  animation:scrollDot 2s ease infinite;
+}
+@keyframes scrollDot {
+  0%{transform:translateY(0);opacity:1}
+  100%{transform:translateY(10px);opacity:0}
+}
+
+/* Photo credit placeholder */
+.hero-photo-cta {
+  position:absolute;
+  bottom:32px; right:var(--pad);
+  z-index:3;
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:10px; letter-spacing:3px; text-transform:uppercase;
+  color:rgba(255,255,255,.2);
+  /* Remove this once you add a real photo */
+  display:flex; align-items:center; gap:8px;
+}
+.hero-photo-cta::before {
+  content:'';
+  width:20px; height:1px;
+  background:rgba(255,255,255,.2);
+}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+
+/* ── STATS ── */
 .stats-strip{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
-.stat-item{padding:36px 28px;border-right:1px solid var(--line);text-align:center}
+.stat-item{padding:32px 24px;border-right:1px solid var(--line);text-align:center}
 .stat-item:last-child{border-right:none}
-.stat-num{font-family:'Bebas Neue',sans-serif;font-size:48px;line-height:1;color:var(--white);margin-bottom:4px}
+.stat-num{font-family:'Bebas Neue',sans-serif;font-size:44px;line-height:1;color:var(--white);margin-bottom:4px}
 .stat-num.r{color:var(--red)}
 .stat-num.g{color:var(--gold-l)}
 .stat-lbl{font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:4px;text-transform:uppercase;color:var(--muted)}
 
-.brand-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px}
-.brand-card{padding:56px 44px;background:var(--grey2);position:relative;overflow:hidden;text-decoration:none;display:block;border-top:4px solid transparent;transition:border-color .3s,background .3s}
+/* ── BRAND CARDS ── */
+.brand-grid{display:grid;grid-template-columns:1fr 1fr;gap:3px}
+.brand-card{
+  padding:56px 48px; background:var(--grey2);
+  position:relative; overflow:hidden;
+  text-decoration:none; display:flex; flex-direction:column;
+  border-top:4px solid transparent;
+  transition:border-color .3s,background .3s,transform .3s var(--ease);
+}
 .brand-card.red{border-top-color:var(--red)}
 .brand-card.gold{border-top-color:var(--gold)}
-.brand-card:hover{background:var(--grey3)}
-.brand-card-bg{position:absolute;right:-20px;bottom:-20px;font-family:'Bebas Neue',sans-serif;font-size:160px;color:rgba(255,255,255,.025);line-height:1;pointer-events:none}
-.bc-label{font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:5px;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
-.bc-name{font-family:'Bebas Neue',sans-serif;font-size:36px;letter-spacing:2px;color:var(--white);margin-bottom:12px}
-.bc-desc{font-size:14px;color:var(--muted);line-height:1.8;max-width:380px;margin-bottom:28px}
-.bc-link{font-family:'Barlow Condensed',sans-serif;font-size:12px;letter-spacing:3px;text-transform:uppercase;color:var(--red)}
+.brand-card:hover{background:var(--grey3);transform:translateY(-3px)}
+.bc-watermark{
+  position:absolute; right:-16px; bottom:-24px;
+  font-family:'Bebas Neue',sans-serif; font-size:180px;
+  color:rgba(255,255,255,.02); line-height:1; pointer-events:none;
+  user-select:none;
+}
+.bc-label{font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:5px;text-transform:uppercase;color:var(--muted);margin-bottom:12px}
+.bc-name{font-family:'Bebas Neue',sans-serif;font-size:40px;letter-spacing:2px;color:var(--white);margin-bottom:16px;line-height:1}
+.bc-desc{font-size:14px;color:var(--muted);line-height:1.85;max-width:380px;flex:1;margin-bottom:32px}
+.bc-link{
+  font-family:'Barlow Condensed',sans-serif;font-size:12px;letter-spacing:3px;text-transform:uppercase;
+  color:var(--red); display:inline-flex; align-items:center; gap:8px;
+}
 .brand-card.gold .bc-link{color:var(--gold)}
+.bc-link::after{
+  content:'→';
+  transition:transform .2s var(--ease);
+}
+.brand-card:hover .bc-link::after{transform:translateX(4px)}
 
-.story-flow{display:flex;flex-direction:column;gap:2px}
-.story-step{display:flex;gap:20px;align-items:center;padding:18px 24px;background:var(--grey2);border-left:3px solid transparent;transition:all .3s}
-.story-step:hover{border-left-color:var(--red);background:var(--grey3)}
-.story-icon{font-size:22px;flex-shrink:0;width:32px;text-align:center}
-.story-text strong{display:block;font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--white);margin-bottom:2px}
-.story-text{font-size:13px;color:var(--muted)}
+/* ── STORY FLOW ── */
+.story-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:3px;margin-top:48px}
+.story-card{
+  background:var(--grey2); padding:32px 28px;
+  border-top:2px solid var(--line);
+  transition:border-color .3s,background .3s;
+  position:relative;
+}
+.story-card:hover{border-top-color:var(--red);background:var(--grey3)}
+.story-card-num{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:56px; color:rgba(192,57,43,.15);
+  line-height:1; margin-bottom:12px;
+}
+.story-card-icon{font-size:28px;margin-bottom:12px}
+.story-card-title{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:16px; font-weight:700; letter-spacing:2px; text-transform:uppercase;
+  color:var(--white); margin-bottom:8px;
+}
+.story-card-desc{font-size:13px;color:var(--muted);line-height:1.7}
 
+/* ── RESPONSIVE ── */
 @media(max-width:1100px){
-  .hero{grid-template-columns:1fr;align-items:start;padding-top:calc(var(--nav-h) + 60px)}
-  .hero-right{padding-bottom:0}
+  .hero-content{grid-template-columns:1fr;gap:32px}
+  .hero-right{max-width:520px}
+  .story-grid{grid-template-columns:repeat(2,1fr)}
 }
 @media(max-width:900px){
-  .hero{padding:calc(var(--nav-h) + 40px) var(--pad-sm) 64px;grid-template-columns:1fr;gap:24px}
-  .hero-num{display:none}
-  .hero h1{font-size:clamp(52px,14vw,88px)}
-  .hero-actions{flex-direction:column;align-items:flex-start}
+  .hero{padding:0 var(--pad-sm) 72px}
+  .hero-h1{font-size:clamp(52px,14vw,88px)}
+  .hero-actions{flex-direction:column}
   .hero-actions .btn{width:100%;justify-content:center}
   .hero-scroll{display:none}
   .stats-strip{grid-template-columns:repeat(2,1fr)}
   .brand-grid{grid-template-columns:1fr}
+  .story-grid{grid-template-columns:1fr 1fr}
 }
 @media(max-width:600px){
-  .hero h1{font-size:clamp(44px,16vw,72px)}
+  .hero-h1{font-size:clamp(44px,16vw,72px)}
   .stat-item{padding:24px 16px}
   .stat-num{font-size:36px}
+  .story-grid{grid-template-columns:1fr}
+  .brand-card{padding:40px 28px}
 }
 </style>
 </head>
@@ -80,6 +290,7 @@
 
 <div class="cursor" id="cursor"></div>
 <div class="cursor-ring" id="cursorRing"></div>
+
 <nav id="mainNav">
   <a href="index.html" class="nav-logo">PJ'S <em>UNIVERSE</em> <span class="nav-dot"></span></a>
   <div class="nav-links">
@@ -112,6 +323,7 @@
   </div>
   <button class="nav-toggle" id="navToggle"><span></span><span></span><span></span></button>
 </nav>
+
 <div class="mobile-nav" id="mobileNav">
   <button class="mobile-close" id="mobileClose">✕</button>
   <a href="index.html" onclick="closeMobile()">Home</a>
@@ -123,80 +335,170 @@
   <a href="contact.html" onclick="closeMobile()">Contact</a>
 </div>
 
+<!-- ═══ HERO ═══ -->
 <header class="hero">
-  <div class="hero-bg"></div>
-  <div class="speed-line"></div>
-  <div class="speed-line"></div>
-  <div class="hero-num">PJ</div>
-  <div class="hero-left">
-    <div class="hero-label">Scale Models · Race Photography · Automotive Art</div>
-    <h1>I Shoot It.<br><em>Then I</em><br><span class="g">Build It.</span></h1>
+  <!-- Background photo — replace class content with: background-image:url('photos/hero.jpg') -->
+  <div class="hero-photo" id="heroBg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-grain"></div>
+  <div class="hero-lines">
+    <span></span><span></span><span></span>
   </div>
-  <div class="hero-right">
-    <p class="hero-sub">Professional scale model builder and automotive photographer. Two brands, one obsession — the cars that make your pulse race.</p>
-    <div class="hero-actions">
-      <a href="scaleworks.html" class="btn btn-primary">🔧 Commission a Build</a>
-      <a href="autography.html" class="btn btn-gold">📷 Book a Race Day</a>
-      <a href="portfolio.html" class="btn btn-secondary">View Portfolio ↓</a>
+
+  <div class="hero-content">
+    <div class="hero-left">
+      <div class="hero-eyebrow">PJ's Universe · Belgium</div>
+      <h1 class="hero-h1">
+        Shoot
+        <span class="line-red">&amp;</span>
+        <span class="line-gold">Build</span>
+      </h1>
+    </div>
+    <div class="hero-right">
+      <div class="hero-tagline">
+        Professional scale model builder and racetrack photographer. I capture the real car at the event — then recreate it in 1:18 on my workbench.
+      </div>
+      <div class="hero-divider"></div>
+      <div class="hero-actions">
+        <a href="scaleworks.html" class="btn btn-primary">🔧 Commission a Build</a>
+        <a href="autography.html" class="btn btn-gold">📷 Book a Race Day</a>
+      </div>
     </div>
   </div>
-  <div class="hero-scroll"><div class="scroll-line"></div>Scroll</div>
+
+  <div class="hero-scroll">
+    <div class="scroll-mouse"><div class="scroll-dot"></div></div>
+    Scroll
+  </div>
+
+  <!-- Remove this line once you add a real hero photo -->
+  <div class="hero-photo-cta">Add hero.jpg to photos/ folder</div>
 </header>
 
+<!-- ═══ STATS ═══ -->
 <div class="stats-strip">
   <div class="stat-item reveal"><div class="stat-num r">7K</div><div class="stat-lbl">Followers</div></div>
   <div class="stat-item reveal"><div class="stat-num g">90K</div><div class="stat-lbl">Monthly Reach</div></div>
   <div class="stat-item reveal"><div class="stat-num">3</div><div class="stat-lbl">Builds / Year</div></div>
-  <div class="stat-item reveal"><div class="stat-num r">2</div><div class="stat-lbl">Brands, 1 Passion</div></div>
+  <div class="stat-item reveal"><div class="stat-num r">WEC</div><div class="stat-lbl">Series Covered</div></div>
 </div>
 
+<!-- ═══ BRANDS ═══ -->
 <section class="section dark">
   <div class="section-label">The Brands</div>
-  <h2 class="section-title">TWO BRANDS,<br>ONE WORLD</h2>
+  <h2 class="section-title">TWO BRANDS,<br>ONE PASSION</h2>
   <div class="brand-grid">
     <a href="scaleworks.html" class="brand-card red reveal">
-      <div class="brand-card-bg">S</div>
+      <div class="bc-watermark">S</div>
       <div class="bc-label">Scale Models</div>
       <div class="bc-name">PJ's Scaleworks</div>
-      <p class="bc-desc">Museum-quality scale model builds. Only 3 commissions per year — each one a full Shoot & Build collaboration between the real car and the workbench replica.</p>
-      <div class="bc-link">Explore Scaleworks →</div>
+      <p class="bc-desc">Museum-quality scale model commissions. Only 3 builds per year — each one a full Shoot & Build collaboration. Every detail obsessed over. No compromises.</p>
+      <span class="bc-link">Explore Scaleworks</span>
     </a>
     <a href="autography.html" class="brand-card gold reveal">
-      <div class="brand-card-bg">A</div>
+      <div class="bc-watermark">A</div>
       <div class="bc-label">Race Photography</div>
       <div class="bc-name">PJ's Autography</div>
-      <p class="bc-desc">Racetrack and automotive photography for teams, drivers and sponsors. The same eye for detail that goes into every scale build — pointed at the real thing.</p>
-      <div class="bc-link" style="color:var(--gold)">Explore Autography →</div>
+      <p class="bc-desc">Professional racetrack photography for WEC, Porsche Carrera Cup and more. The same obsessive eye for detail — pointed at the real thing at speed.</p>
+      <span class="bc-link" style="color:var(--gold)">Explore Autography</span>
     </a>
   </div>
 </section>
 
+<!-- ═══ STORY ═══ -->
 <section class="section">
-  <div class="section-label">The Signature Story</div>
-  <h2 class="section-title">I SHOOT IT.<br>THEN I BUILD IT.</h2>
-  <p class="section-body">One car. Two perspectives. The real thing captured at speed — then recreated in 1:18 on my workbench. The story nobody else is telling.</p>
-  <div class="story-flow">
-    <div class="story-step reveal"><div class="story-icon">📷</div><div class="story-text"><strong>Racetrack Shoot</strong>I photograph your car at the event — speed, detail, atmosphere.</div></div>
-    <div class="story-step reveal"><div class="story-icon">🔧</div><div class="story-text"><strong>Scale Replica Build</strong>I recreate it by hand — exact livery, maximum detail, museum quality.</div></div>
-    <div class="story-step reveal"><div class="story-icon">📸</div><div class="story-text"><strong>Full Documentation</strong>Every build is professionally photographed before it ships.</div></div>
-    <div class="story-step reveal"><div class="story-icon">🏆</div><div class="story-text"><strong>Unique Collector Piece</strong>A one-of-a-kind object that tells the full story of your car.</div></div>
+  <div class="section-label">The Process</div>
+  <h2 class="section-title">SHOOT &amp; BUILD —<br>THE FULL STORY</h2>
+  <p class="section-body">One car. Two perspectives. The real thing captured at speed — then recreated in 1:18 on my workbench. This is the story nobody else is telling.</p>
+
+  <div class="story-grid">
+    <div class="story-card reveal">
+      <div class="story-card-num">01</div>
+      <div class="story-card-icon">📷</div>
+      <div class="story-card-title">Racetrack Shoot</div>
+      <div class="story-card-desc">I travel to international events — WEC, Porsche Cup, Le Mans — and photograph the real car at speed. Every angle, every detail.</div>
+    </div>
+    <div class="story-card reveal">
+      <div class="story-card-num">02</div>
+      <div class="story-card-icon">🔧</div>
+      <div class="story-card-title">Scale Build</div>
+      <div class="story-card-desc">Back in my workshop I recreate the car by hand. Exact livery. Exact sponsor decals. Maximum interior and engine bay detail.</div>
+    </div>
+    <div class="story-card reveal">
+      <div class="story-card-num">03</div>
+      <div class="story-card-icon">📸</div>
+      <div class="story-card-title">Documentation</div>
+      <div class="story-card-desc">Every build is professionally photographed in my studio before it ships. The final model, captured the same way I shoot the real car.</div>
+    </div>
+    <div class="story-card reveal">
+      <div class="story-card-num">04</div>
+      <div class="story-card-icon">🏆</div>
+      <div class="story-card-title">Collector Piece</div>
+      <div class="story-card-desc">A one-of-a-kind object that tells the full story of your car, your season, your livery. The story nobody else is telling.</div>
+    </div>
   </div>
-  <div style="margin-top:32px;display:flex;gap:12px;flex-wrap:wrap;">
+
+  <div style="margin-top:40px;display:flex;gap:12px;flex-wrap:wrap;">
     <a href="contact.html" class="btn btn-primary">Enquire About a Commission</a>
     <a href="portfolio.html" class="btn btn-secondary">View Portfolio →</a>
   </div>
 </section>
 
+<!-- ═══ FOOTER ═══ -->
 <footer>
   <div class="footer-grid">
-    <div><div class="footer-brand">PJ'S <em>UNIVERSE</em></div><div class="footer-tagline">Scale Models · Race Photography · Automotive Art</div><p style="font-size:13px;color:var(--muted);max-width:260px;">"I shoot it at the track. Then I build it."</p></div>
-    <div class="footer-col"><h4>Scaleworks</h4><a href="scaleworks.html">Shoot & Build</a><a href="parts.html">Aftermarket Parts</a><a href="https://www.etsy.com/be/shop/PjsuniverseShop" target="_blank">Etsy Shop</a></div>
-    <div class="footer-col"><h4>Autography</h4><a href="autography.html">Race Day Packages</a><a href="portfolio.html">Portfolio</a><a href="contact.html">Book a Session</a></div>
-    <div class="footer-col"><h4>Connect</h4><a href="https://facebook.com/pjsscaleworks" target="_blank">Scaleworks FB</a><a href="https://facebook.com/pjsautography" target="_blank">Autography FB</a><a href="sorter.html">PJ Sorter App</a><a href="contact.html">Get in Touch</a></div>
+    <div>
+      <div class="footer-brand">PJ'S <em>UNIVERSE</em></div>
+      <div class="footer-tagline">Scale Models · Race Photography · Automotive Art</div>
+      <p style="font-size:13px;color:var(--muted);max-width:260px;margin-top:8px;">Shoot &amp; Build — the story nobody else is telling.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Scaleworks</h4>
+      <a href="scaleworks.html">Shoot & Build</a>
+      <a href="parts.html">Aftermarket Parts</a>
+      <a href="https://www.etsy.com/be/shop/PjsuniverseShop" target="_blank">Etsy Shop</a>
+    </div>
+    <div class="footer-col">
+      <h4>Autography</h4>
+      <a href="autography.html">Race Day Packages</a>
+      <a href="portfolio.html">Portfolio</a>
+      <a href="contact.html">Book a Session</a>
+    </div>
+    <div class="footer-col">
+      <h4>Connect</h4>
+      <a href="https://facebook.com/pjsscaleworks" target="_blank">Scaleworks FB</a>
+      <a href="https://facebook.com/pjsautography" target="_blank">Autography FB</a>
+      <a href="sorter.html">PJ Sorter App</a>
+      <a href="contact.html">Get in Touch</a>
+    </div>
   </div>
-  <div class="footer-bottom"><div class="footer-copy">© 2026 PJ's Universe. All rights reserved.</div><div class="footer-copy">pjsuniverse.com</div></div>
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2026 PJ's Universe. All rights reserved.</div>
+    <div class="footer-copy">pjsuniverse.com</div>
+  </div>
 </footer>
 
 <script src="shared.js"></script>
+<script>
+// Auto-load hero photo from photos.json (generated by build.js)
+fetch('photos.json')
+  .then(r => r.json())
+  .then(data => {
+    const hero = data.site && data.site.hero;
+    const bg   = document.getElementById('heroBg');
+    const hint = document.querySelector('.hero-photo-cta');
+    if (hero && bg) {
+      bg.style.backgroundImage = `url('${hero}')`;
+      if (hint) hint.style.display = 'none';
+    }
+  })
+  .catch(() => {}); // fail silently — gradient fallback shows
+
+// Parallax on hero photo
+window.addEventListener('scroll', () => {
+  const bg = document.getElementById('heroBg');
+  if (bg) bg.style.transform = `scale(1.05) translateY(${scrollY * 0.15}px)`;
+}, { passive: true });
+</script>
 </body>
 </html>

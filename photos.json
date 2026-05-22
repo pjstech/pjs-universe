@@ -1,4 +1,8 @@
 {
+  "_generated": "2026-05-22T07:12:08.020Z",
+  "site": {
+    "hero": ""
+  },
   "track": {
     "wec-gt": {
       "label": "WEC GT",
@@ -29,17 +33,20 @@
     "3d-printed": {
       "label": "3D Printed Parts",
       "description": "Custom 3D printed scale model components",
-      "series": {}
+      "cover": "",
+      "photos": []
     },
     "aluminium": {
       "label": "Aluminium Parts",
       "description": "Hand-finished aluminium scale model parts",
-      "series": {}
+      "cover": "",
+      "photos": []
     },
     "stickers": {
       "label": "Custom Stickers",
       "description": "Precision-cut custom decal sets",
-      "series": {}
+      "cover": "",
+      "photos": []
     }
   },
   "parts": {
