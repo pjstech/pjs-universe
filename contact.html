@@ -173,7 +173,7 @@
     <!-- FORM -->
     <div>
       <div class="section-label" style="margin-bottom:24px;">Send a Message</div>
-      <form onsubmit="handleSubmit(event)">
+      <form name="contact" method="POST" data-netlify="true" onsubmit="handleSubmit(event)">
         <div class="form-group">
           <label class="form-label">Your Name</label>
           <input class="form-input" type="text" id="f-name" placeholder="Your name" required>
@@ -295,6 +295,7 @@ function updateRouting(val) {
 
 function handleSubmit(e) {
   e.preventDefault();
+  const form    = e.target;
   const val     = document.getElementById('f-service').value;
   const email   = val === 'autography' ? 'pjsautography@hotmail.com' : 'pjsscaleworks@hotmail.com';
   const name    = document.getElementById('f-name').value;
@@ -302,15 +303,28 @@ function handleSubmit(e) {
   const service = document.getElementById('f-service');
   const svcText = service.options[service.selectedIndex].text;
   const msg     = document.getElementById('f-msg').value;
-  const subject = encodeURIComponent("PJ's Universe Enquiry — " + svcText);
-  const body    = encodeURIComponent(
-    'Name: ' + name + '\nFrom: ' + from + '\nService: ' + svcText + '\n\nMessage:\n' + msg
-  );
-  window.location.href = 'mailto:' + email + '?subject=' + subject + '&body=' + body;
-  document.getElementById('success-msg').style.display = 'block';
-  e.target.reset();
-  document.getElementById('routing-box').style.display = 'none';
-  setTimeout(() => { document.getElementById('success-msg').style.display = 'none'; }, 8000);
+
+  // Try Cloudflare form submission first
+  const formData = new FormData(form);
+  formData.append('_to', email);
+
+  fetch('/', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: new URLSearchParams(formData).toString()
+  })
+  .then(() => {
+    document.getElementById('success-msg').style.display = 'block';
+    form.reset();
+    document.getElementById('routing-box').style.display = 'none';
+    setTimeout(() => { document.getElementById('success-msg').style.display = 'none'; }, 8000);
+  })
+  .catch(() => {
+    // Fallback to mailto if fetch fails
+    const subject = encodeURIComponent("PJ's Universe Enquiry — " + svcText);
+    const body    = encodeURIComponent('Name: ' + name + '\nFrom: ' + from + '\nService: ' + svcText + '\n\nMessage:\n' + msg);
+    window.location.href = 'mailto:' + email + '?subject=' + subject + '&body=' + body;
+  });
 }
 </script>
 </body>

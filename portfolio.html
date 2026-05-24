@@ -153,7 +153,7 @@ let photoData = null;
 let activeTab = 'track';
 
 // Load photos.json once
-fetch('photos.json')
+fetch('/photos.json')
   .then(r => r.json())
   .then(data => {
     photoData = data;
