@@ -93,7 +93,8 @@ nav {
   height:var(--nav-h); z-index:100;
   display:flex; align-items:center; justify-content:space-between;
   padding:0 var(--pad);
-  border-bottom:1px solid transparent;
+  background:var(--black);
+  border-bottom:1px solid var(--line);
   transition:background .4s,border-color .4s,backdrop-filter .4s;
 }
 nav.scrolled { background:rgba(7,7,7,.95); border-color:var(--line); backdrop-filter:blur(20px); }
