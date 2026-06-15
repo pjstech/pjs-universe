@@ -197,8 +197,8 @@ nav.scrolled { background:rgba(7,7,7,.95); border-color:var(--line); backdrop-fi
 .back-btn:hover { color:var(--white); }
 .gallery-title { font-family:'Bebas Neue',sans-serif; font-size:40px; letter-spacing:2px; color:var(--white); }
 .gallery-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:3px; }
-.gallery-item { position:relative; overflow:hidden; aspect-ratio:3/2; background:var(--grey2); cursor:pointer; }
-.gallery-item img { width:100%; height:100%; object-fit:cover; display:block; transition:transform .5s var(--ease); pointer-events:none; user-select:none; -webkit-user-drag:none; }
+.gallery-item { position:relative; overflow:hidden; aspect-ratio:16/9; background:var(--grey2); cursor:pointer; }
+.gallery-item img { width:100%; height:100%; object-fit:contain; display:block; transition:transform .5s var(--ease); pointer-events:none; user-select:none; -webkit-user-drag:none; }
 .gallery-item:hover img { transform:scale(1.04); }
 .gallery-item-overlay { position:absolute; inset:0; background:linear-gradient(to top,rgba(0,0,0,.65) 0%,transparent 50%); opacity:0; transition:opacity .3s; display:flex; align-items:flex-end; padding:14px; }
 .gallery-item:hover .gallery-item-overlay { opacity:1; }
