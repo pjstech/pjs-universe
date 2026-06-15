@@ -252,14 +252,3 @@ function switchTab(tab) {
   document.getElementById('tab-builds').classList.toggle('active', tab==='builds');
 }
 
-// expose ro for shared.js reveal observer
-var ro;
-document.addEventListener('DOMContentLoaded', () => {
-  ro = new IntersectionObserver(entries => {
-    entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
-  }, {threshold:0.08});
-  document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
-});
-</script>
-</body>
-</html>
