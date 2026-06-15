@@ -102,9 +102,9 @@ nav.scrolled { background:rgba(7,7,7,.95); border-color:var(--line); backdrop-fi
 .nav-dot { width:5px; height:5px; border-radius:50%; background:var(--red); animation:blink 2s ease infinite; flex-shrink:0; }
 @keyframes blink { 0%,100%{opacity:1}50%{opacity:.15} }
 .nav-links { display:flex; align-items:center; gap:28px; }
-.nav-links a { font-family:'Barlow Condensed',sans-serif; font-size:12px; letter-spacing:3px; text-transform:uppercase; color:var(--muted); text-decoration:none; transition:color .2s; position:relative; white-space:nowrap; }
-.nav-links a::after { content:''; position:absolute; bottom:-3px; left:0; width:0; height:1px; background:var(--red); transition:width .3s var(--ease); }
-.nav-links a:hover,.nav-links a.active { color:var(--white); }
+.nav-links a { font-family:'Barlow Condensed',sans-serif; font-size:12px; letter-spacing:3px; text-transform:uppercase; color:var(--white); text-decoration:none; transition:color .2s; position:relative; white-space:nowrap; }
+.nav-links a::after { content:''; position:absolute; bottom:-3px; left:0; width:0; height:1px; background:var(--gold); transition:width .3s var(--ease); }
+.nav-links a:hover,.nav-links a.active { color:var(--gold-l); }
 .nav-links a:hover::after,.nav-links a.active::after { width:100%; }
 .nav-cta { background:var(--red)!important; color:white!important; padding:9px 20px; }
 .nav-cta:hover { background:var(--red-d)!important; }
