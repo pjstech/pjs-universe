@@ -193,12 +193,11 @@ function initBuilds() {
   const keys = Object.keys(cats);
   grid.innerHTML = keys.map(key => {
     const c = cats[key];
-    const series = c.series || {};
-    const seriesKeys = Object.keys(series);
-    const count = seriesKeys.reduce((acc,k) => acc + (series[k].photos ? series[k].photos.length : 0), 0);
+    const count = c.photos ? c.photos.length : 0;
+    const cover = c.cover || '';
     return `
       <div class="series-card reveal" onclick="openSeries('builds','${key}')">
-        <div class="series-card-placeholder">${key==='3d-printed'?'🖨️':key==='aluminium'?'⚙️':'🎨'}</div>
+        ${cover ? `<img class="series-card-img" src="${cover}" alt="${c.label}" draggable="false" oncontextmenu="return false;" loading="lazy">` : `<div class="series-card-placeholder">🔧</div>`}
         <div class="series-card-bg"></div>
         <div class="series-card-content">
           <div class="series-card-label">Category</div>
@@ -220,14 +219,10 @@ function openSeries(tab, key) {
 
   // Build photo objects
   let photos = [];
-  if (tab === 'track') {
+   if (tab === 'track') {
     photos = buildPhotoObjects('photos/track/' + key, data.photos);
   } else {
-    // builds: show all series photos flattened
-    const series = data.series || {};
-    Object.keys(series).forEach(sk => {
-      photos = photos.concat(buildPhotoObjects('photos/builds/' + key + '/' + sk, series[sk].photos || []));
-    });
+    photos = buildPhotoObjects('photos/builds/' + key, data.photos);
   }
 
   buildGallery(tab + '-gallery', photos);
