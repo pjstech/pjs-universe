@@ -20,11 +20,13 @@ const STRUCTURE = {
     'legends-le-mans':      { label:'Legends of Le Mans',   description:'Historic racing at its finest' },
   },
   builds: {
+    'models':     { label:'Completed Builds',  description:'Finished scale model builds' },
     '3d-printed': { label:'3D Printed Parts',  description:'Custom 3D printed scale model components' },
     'aluminium':  { label:'Aluminium Parts',   description:'Hand-finished aluminium scale model parts' },
     'stickers':   { label:'Custom Stickers',   description:'Precision-cut custom decal sets' },
   },
   parts: {
+    'models':     { label:'Completed Builds',  description:'Finished scale model builds' },
     '3d-printed': { label:'3D Printed Parts',  description:'High-detail resin and FDM printed components' },
     'aluminium':  { label:'Aluminium Parts',   description:'CNC-machined and hand-finished aluminium components' },
     'stickers':   { label:'Custom Stickers & Decals', description:'Precision-cut custom decal sets' },
