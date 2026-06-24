@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="PJ Sorter — The smart photo rating and sorting app for photographers.">
+<meta name="description" content="PJ Sorter — AI photo culling and Lightroom recipes built by a motorsport photographer. Clear the rejects, surface your best frames, ship a clean edit.">
 <title>PJ Sorter — PJ's Universe</title>
 <link rel="stylesheet" href="style.css">
 <style>
@@ -24,11 +24,11 @@
 
 .notify-box{background:linear-gradient(135deg,#0f0a00,var(--grey2));border:1px solid rgba(201,146,14,.25);padding:48px;text-align:center;margin:48px 0}
 .notify-box h3{font-family:'Bebas Neue',sans-serif;font-size:40px;letter-spacing:2px;color:var(--white);margin-bottom:8px}
-.notify-box p{font-size:14px;color:var(--muted);max-width:400px;margin:0 auto 28px}
+.notify-box p{font-size:14px;color:var(--muted);max-width:460px;margin:0 auto 28px}
 .notify-form{display:flex;gap:8px;max-width:440px;margin:0 auto;flex-wrap:wrap}
 .notify-input{flex:1;background:var(--grey2);border:1px solid var(--line);color:var(--white);padding:13px 16px;font-family:'Barlow',sans-serif;font-size:14px;outline:none;transition:border-color .2s;min-width:200px}
 .notify-input:focus{border-color:var(--gold)}
-.notify-btn{background:var(--gold);color:var(--black);border:none;padding:13px 24px;font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;letter-spacing:3px;text-transform:uppercase;transition:background .2s;white-space:nowrap}
+.notify-btn{background:var(--gold);color:var(--black);border:none;padding:13px 24px;font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;letter-spacing:3px;text-transform:uppercase;transition:background .2s;white-space:nowrap;cursor:pointer}
 .notify-btn:hover{background:var(--gold-l)}
 .notify-success{display:none;color:var(--gold);font-size:14px;margin-top:12px}
 
@@ -39,10 +39,46 @@
 .how-title{font-family:'Barlow Condensed',sans-serif;font-size:16px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--white);margin-bottom:4px}
 .how-desc{font-size:13px;color:var(--muted);line-height:1.7}
 
+/* who it's for */
+.aud-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;margin:40px 0}
+.aud-card{padding:40px 34px;background:var(--grey2);border-top:3px solid transparent}
+.aud-card.new{border-top-color:var(--gold)}
+.aud-card.pro{border-top-color:var(--red)}
+.aud-tag{font-family:'Barlow Condensed',sans-serif;font-size:11px;letter-spacing:5px;text-transform:uppercase;color:var(--gold)}
+.aud-card.pro .aud-tag{color:var(--red)}
+.aud-card h3{font-family:'Bebas Neue',sans-serif;font-size:30px;letter-spacing:1px;color:var(--white);margin:8px 0 18px}
+.aud-card ul{list-style:none;padding:0;margin:0}
+.aud-card li{font-size:13.5px;color:var(--text);line-height:1.6;padding:9px 0;border-bottom:1px solid var(--line);display:flex;gap:11px}
+.aud-card li:last-child{border-bottom:none}
+.aud-card li::before{content:"›";color:var(--gold);font-weight:700;flex-shrink:0}
+.aud-card.pro li::before{color:var(--red)}
+
+/* screenshots */
+.shots-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;margin:40px 0}
+.shot{background:var(--grey2);overflow:hidden;border-top:3px solid transparent;transition:border-color .3s}
+.shot:hover{border-top-color:var(--gold)}
+.shot .ph{aspect-ratio:16/10;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;color:var(--muted);background:repeating-linear-gradient(45deg,#161616,#161616 12px,#1a1a1a 12px,#1a1a1a 24px)}
+.shot .ph .px{font-family:'Bebas Neue',sans-serif;font-size:26px;letter-spacing:1px;color:#333}
+.shot img{width:100%;display:block}
+.shot .cap{padding:16px 20px;border-top:1px solid var(--line)}
+.shot .cap .h{font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--white)}
+.shot .cap .d{font-size:12px;color:var(--muted)}
+
+/* tester spots */
+.spots{display:flex;gap:7px;flex-wrap:wrap;justify-content:center;margin:22px auto 28px;max-width:380px}
+.spot{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:16px;color:#333;background:var(--grey3)}
+.spot.open{border-color:var(--gold);color:var(--gold)}
+.tester-asks{display:grid;grid-template-columns:1fr 1fr;gap:2px;max-width:680px;margin:32px auto 0;text-align:left}
+.tester-asks .col{background:var(--grey2);padding:26px 28px}
+.tester-asks .col .h{font-family:'Barlow Condensed',sans-serif;font-size:13px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:12px}
+.tester-asks ul{list-style:none;padding:0;margin:0}
+.tester-asks li{font-size:13px;color:var(--text);line-height:1.6;padding:7px 0;display:flex;gap:10px}
+.tester-asks li::before{content:"✓";color:var(--gold);flex-shrink:0}
+
 @media(max-width:900px){
   .sorter-hero{padding:calc(var(--nav-h) + 40px) 20px 48px}
   .sorter-num{display:none}
-  .features-grid{grid-template-columns:1fr}
+  .features-grid,.aud-grid,.shots-grid,.tester-asks{grid-template-columns:1fr}
   .notify-form{flex-direction:column}
   .notify-input,.notify-btn{width:100%}
 }
@@ -99,63 +135,142 @@
   <div class="sorter-grid"></div>
   <div class="sorter-num">PJS</div>
   <div class="sorter-content">
-    <div class="coming-badge"><div class="coming-dot"></div>Coming Soon</div>
+    <div class="coming-badge"><div class="coming-dot"></div>Testers Wanted</div>
     <div class="page-hero-label gold" style="position:relative;z-index:1;">PJ's Universe</div>
     <h1 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(56px,10vw,110px);line-height:.9;color:var(--white);letter-spacing:2px;margin-bottom:16px;position:relative;z-index:1;">PJ <em style="color:var(--gold);font-style:normal;">SORTER</em></h1>
-    <p style="font-size:16px;color:var(--muted);max-width:480px;line-height:1.8;position:relative;z-index:1;">The smart photo rating and sorting app built by a photographer, for photographers. Rate your shots fast, sort the keepers, ship your best work.</p>
+    <p style="font-size:16px;color:var(--muted);max-width:500px;line-height:1.8;position:relative;z-index:1;">AI photo culling built by a motorsport photographer, for photographers. It clears the obvious rejects, surfaces your strongest frames, and hands you a Lightroom recipe — so your time goes on the shots that earn it.</p>
   </div>
 </div>
 
+<!-- WHAT IT IS -->
 <section class="section dark">
-  <div class="section-label gold">What It Does</div>
-  <h2 class="section-title">SORT FASTER.<br>SHOOT BETTER.</h2>
-  <p class="section-body">After every race day you come home with hundreds of shots. PJ Sorter helps you cut through them fast — rate, tag, sort, and export your best work in a fraction of the time.</p>
+  <div class="section-label gold">What It Is</div>
+  <h2 class="section-title">CUT THE GRIND.<br>KEEP THE QUALITY.</h2>
+  <p class="section-body">A heavy race-day take can swallow an evening — sometimes the better part of a day — frame by near-identical frame. PJ Sorter doesn't pretend to make that vanish. It does the dull half: scores every photo on sharpness, framing and timing, sorts them into three honest tiers, and pulls your rejects out of sight. You stay in control of the keepers. This is a quality tool for a careful workflow, not a volume machine.</p>
 
   <div class="features-grid">
     <div class="feature-card reveal">
       <div class="feature-icon">⚡</div>
-      <div class="feature-title">Rate in Seconds</div>
-      <div class="feature-desc">Keyboard-driven rating system lets you blaze through hundreds of photos at speed. One key press per photo — keep or cull.</div>
+      <div class="feature-title">AI-Assisted Culling</div>
+      <div class="feature-desc">Every frame scored on sharpness, framing and timing — so the best of a burst surfaces first and the throwaways drop out.</div>
     </div>
     <div class="feature-card reveal">
-      <div class="feature-icon">📂</div>
-      <div class="feature-title">Smart Sorting</div>
-      <div class="feature-desc">Automatically organises your rated photos into folders. Your 5-stars ready to export, your rejects out of the way.</div>
+      <div class="feature-icon">🏁</div>
+      <div class="feature-title">Three Honest Tiers</div>
+      <div class="feature-desc">Portfolio, Keeper, Reject — fixed, consistent cutoffs. No vague star ratings to second-guess later.</div>
     </div>
     <div class="feature-card reveal">
-      <div class="feature-icon">🏎️</div>
-      <div class="feature-title">Built for Race Photography</div>
-      <div class="feature-desc">Designed around the workflow of a motorsport photographer. Series tagging, event labelling, batch delivery — all built in.</div>
+      <div class="feature-icon">🎨</div>
+      <div class="feature-title">Lightroom Recipe Export</div>
+      <div class="feature-desc">Build a look once and export it as a real .xmp — preset or sidecar — to apply across your keeper set.</div>
     </div>
     <div class="feature-card reveal">
       <div class="feature-icon">🔒</div>
-      <div class="feature-title">Works Offline</div>
-      <div class="feature-desc">No internet required. Works on your laptop in the car park right after the race. Your photos stay on your machine.</div>
-    </div>
-    <div class="feature-card reveal">
-      <div class="feature-icon">📊</div>
-      <div class="feature-title">Shoot Analytics</div>
-      <div class="feature-desc">See your keeper rate, your best events, your most consistent sessions. Learn from your data and improve every race day.</div>
+      <div class="feature-title">On-Device Culling</div>
+      <div class="feature-desc">Your full-resolution files never leave your browser. Only downscaled measurements go to the cloud.</div>
     </div>
     <div class="feature-card reveal">
       <div class="feature-icon">🎯</div>
-      <div class="feature-title">AI-Assisted Rating</div>
-      <div class="feature-desc">Optional AI suggestions flag your sharpest, best-composed shots first. You make the final call — AI just saves you time.</div>
+      <div class="feature-title">Pro Mode Masks</div>
+      <div class="feature-desc">Per-region Subject and Background mask guidance baked into the export. Lightroom handles the detection.</div>
+    </div>
+    <div class="feature-card reveal">
+      <div class="feature-icon">📐</div>
+      <div class="feature-title">Built-in METER</div>
+      <div class="feature-desc">An EV100 calculator and saved spots for your gear, so you nail exposure before the lights go green.</div>
     </div>
   </div>
 </section>
 
+<!-- HOW IT WORKS -->
+<section class="section dark">
+  <div class="section-label gold">How It Works</div>
+  <h2 class="section-title">FOUR STEPS.</h2>
+  <div class="how-it-works">
+    <div class="how-step reveal"><div class="how-num">01</div><div><div class="how-title">Drop your shoot in</div><div class="how-desc">Load a folder. Full-res files stay on your machine — only measurements are sent up for scoring.</div></div></div>
+    <div class="how-step reveal"><div class="how-num">02</div><div><div class="how-title">Every frame gets scored</div><div class="how-desc">Sharpness, framing and timing become one number per photo — the sharp frame in a burst stops hiding.</div></div></div>
+    <div class="how-step reveal"><div class="how-num">03</div><div><div class="how-title">Sorted into three tiers</div><div class="how-desc">Portfolio, Keeper and Reject. The rejects leave your view so you only look at what's worth editing.</div></div></div>
+    <div class="how-step reveal"><div class="how-num">04</div><div><div class="how-title">Export a Lightroom recipe</div><div class="how-desc">Build your look and export a .xmp to apply across the keeper set, then finish the edit your way.</div></div></div>
+  </div>
+</section>
 
+<!-- WHO IT'S FOR -->
+<section class="section dark">
+  <div class="section-label gold">Who It's For</div>
+  <h2 class="section-title">TWO SHOOTERS. ONE TOOL.</h2>
+  <div class="aud-grid">
+    <div class="aud-card new reveal">
+      <div class="aud-tag">New to the track</div>
+      <h3>Build your eye faster</h3>
+      <ul>
+        <li>See why a frame scored high or low and learn what a keeper actually looks like</li>
+        <li>Stop drowning the first time you come home with a full card</li>
+        <li>Start from a sensible Lightroom recipe instead of a blank slider panel</li>
+        <li>Grow a portfolio of your genuinely best shots, not your most-fiddled ones</li>
+      </ul>
+    </div>
+    <div class="aud-card pro reveal">
+      <div class="aud-tag">Working pro</div>
+      <h3>Spend your hours on the keepers</h3>
+      <ul>
+        <li>Let the obvious rejects fall away so the cull stops eating your evening</li>
+        <li>Get a clean shortlist to start a client gallery from</li>
+        <li>One look, exported as .xmp, carried across the whole set</li>
+        <li>Deliver consistent quality without burning a full day on selection</li>
+      </ul>
+    </div>
+  </div>
+</section>
 
+<!-- SEE IT -->
+<section class="section dark">
+  <div class="section-label gold">See It</div>
+  <h2 class="section-title">WHAT IT ACTUALLY DOES.</h2>
+
+  <div class="shots-grid">
+    <div class="shot reveal"><img src="screens/upload.jpg" alt="Select and queue JPEGs to cull, with credit cost shown"><div class="cap"><div class="h">Drop a shoot, queue it up</div></div></div>
+    <div class="shot reveal"><img src="screens/tiers.jpg" alt="Frames scored and sorted into Portfolio, Keeper and Reject"><div class="cap"><div class="h">Portfolio · Keeper · Reject</div></div></div>
+    <div class="shot reveal"><img src="screens/recipe.jpg" alt="Pro Mode: looks and subject/background masks exported as .xmp"><div class="cap"><div class="h">Pro looks, export .xmp</div></div></div>
+    <div class="shot reveal"><img src="screens/meter.jpg" alt="METER tab with light presets and EV100 calculator"><div class="cap"><div class="h">Light presets + EV100</div></div></div>
+  </div>
+
+</section>
+
+<!-- TESTERS -->
 <section class="section dark">
   <div class="notify-box">
-    <h3>BE FIRST TO <em style="color:var(--gold);font-style:normal;">KNOW</em></h3>
-    <p>PJ Sorter is in development. Leave your email and you'll be the first to hear when it launches — plus an early-bird discount.</p>
+    <h3>BE A <em style="color:var(--gold);font-style:normal;">TESTER</em></h3>
+    <p>I'm opening PJ Sorter to a small first group — 5 to 10 motorsport photographers. Free access, free credits, and a direct line to me while we shape the final build. Small on purpose: I want to read your feedback, not drown in it.</p>
+    <div class="spots" aria-label="Tester spots open">
+      <span class="spot open">1</span><span class="spot open">2</span><span class="spot open">3</span><span class="spot open">4</span><span class="spot open">5</span>
+      <span class="spot open">6</span><span class="spot open">7</span><span class="spot open">8</span><span class="spot open">9</span><span class="spot open">10</span>
+    </div>
     <div class="notify-form">
       <input class="notify-input" type="email" id="notify-email" placeholder="your@email.com">
-      <button class="notify-btn" onclick="notifySignup()">Notify Me →</button>
+      <button class="notify-btn" onclick="notifySignup()">Request a Spot →</button>
     </div>
-    <div class="notify-success" id="notify-success">✓ You're on the list! We'll be in touch.</div>
+    <div class="notify-success" id="notify-success">✓ Got it — I'll be in touch about your tester spot.</div>
+
+    <div class="tester-asks">
+      <div class="col">
+        <div class="h">What I ask of you</div>
+        <ul>
+          <li>Run one real shoot through it</li>
+          <li>Tell me what it got right and wrong</li>
+          <li>Flag anything confusing or broken</li>
+          <li>A little honest feedback — that's it</li>
+        </ul>
+      </div>
+      <div class="col">
+        <div class="h">What you get</div>
+        <ul>
+          <li>Free access during the test</li>
+          <li>A pack of free credits</li>
+          <li>Founding-tester pricing at launch</li>
+          <li>A real say in what ships</li>
+        </ul>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -174,11 +289,11 @@
 function notifySignup() {
   const email = document.getElementById('notify-email').value;
   if (!email || !email.includes('@')) return;
-  // Opens mailto as simple capture — replace with proper form endpoint later
-  window.location.href = 'mailto:pjsscaleworks@hotmail.com?subject=PJ Sorter Notify&body=Please notify me when PJ Sorter launches: ' + email;
+  window.location.href = 'mailto:pjsscaleworks@hotmail.com?subject=PJ Sorter Tester&body=I would like a tester spot.%0A%0AI shoot: %0AGear: %0ATypical photos per shoot: %0AEmail: ' + email;
   document.getElementById('notify-success').style.display = 'block';
   document.getElementById('notify-email').value = '';
 }
+
 </script>
 </body>
 </html>
