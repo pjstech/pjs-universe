@@ -18,6 +18,10 @@ const STRUCTURE = {
     'wec-hypercar':         { label:'WEC Hypercar',         description:'FIA World Endurance Championship — Hypercar category' },
     'porsche-carrera-cup':  { label:'Porsche Carrera Cup',  description:'Porsche Carrera Cup Benelux' },
     'legends-le-mans':      { label:'Legends of Le Mans',   description:'Historic racing at its finest' },
+    'lamborghini-super-trofeo': { label:'Lamborghini Super Trofeo', description:'Lamborghini Super Trofeo one-make championship' },
+    'mclaren-trophy-cup':       { label:'McLaren Trophy Cup',       description:'McLaren Trophy — one-make GT racing' },
+    'gt3-legends':              { label:'GT3 Legends',              description:'GT3 machinery at full song' },
+    'gt-world-challenge':       { label:'GT World Challenge',       description:'Fanatec GT World Challenge Europe' },
   },
   builds: {
     'models':     { label:'Completed Builds',  description:'Finished scale model builds' },
